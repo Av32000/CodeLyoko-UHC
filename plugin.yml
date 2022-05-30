@@ -2,3 +2,7 @@ name: CodeLyokoUHC
 version: 1.0
 author: Av32000/RedFly32
 main: fr.av.codelyokouhc.Main
+commands:
+  tpspawn:
+    description: Téléporte tous les joueurs au spawn
+    permission: codelyoko.admin
