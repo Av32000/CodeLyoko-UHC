@@ -2,6 +2,7 @@ package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.GState;
 import fr.av.codelyokouhc.Main;
+import fr.av.codelyokouhc.WaitingPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -22,7 +23,7 @@ public class StartGameCommand implements CommandExecutor {
             Bukkit.broadcastMessage("§aLancement du jeu...");
             Start();
         }else{
-            commandSender.sendMessage("Le est deja en cours !");
+            commandSender.sendMessage("Le jeu est deja en cours !");
         }
         return true;
     }
@@ -37,5 +38,8 @@ public class StartGameCommand implements CommandExecutor {
             player.teleport(main.getGameSpawn());
             player.setGameMode(GameMode.SURVIVAL);
         }
+        WaitingPvp start = new WaitingPvp(main);
+        start.runTaskTimer(main, 0, 20);
+        Bukkit.broadcastMessage("§aC'est parti !");
     }
 }

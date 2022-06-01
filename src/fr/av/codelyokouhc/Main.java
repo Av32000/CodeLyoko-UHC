@@ -6,13 +6,24 @@ import fr.av.codelyokouhc.commands.TpSpawnCommand;
 import fr.av.codelyokouhc.listeners.DammageListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main extends JavaPlugin {
     private GState state;
     private Location gameSpawn;
+    private Map<Player, GRoles> roles = new HashMap<>();
+    private List<GRoles> nonAttribuateRoles = new ArrayList<>();
+
     @Override
     public void onEnable() {
         super.onEnable();
@@ -23,6 +34,9 @@ public class Main extends JavaPlugin {
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
 
         setState(GState.WAITINGPLAYERS);
+        nonAttribuateRoles.add(GRoles.Role1);
+        nonAttribuateRoles.add(GRoles.Role2);
+        nonAttribuateRoles.add(GRoles.Role3);
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListeners(this), this);
@@ -46,5 +60,22 @@ public class Main extends JavaPlugin {
     }
     public void setGameSpawn(Location gameSpawn) {
         this.gameSpawn = gameSpawn;
+    }
+    public Map<Player, GRoles> getRoles() {
+        return roles;
+    }
+    public List<GRoles> getNonAttribuateRoles() {
+        return nonAttribuateRoles;
+    }
+
+
+    public void eliminate(Player player){
+        player.setGameMode(GameMode.SPECTATOR);
+        player.playSound(player.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
+        if(roles.containsKey(player)){
+            Bukkit.broadcastMessage("§e" + player.getDisplayName() + " a été tué ! Il était " + roles.get(player).toString());
+        }else{
+            Bukkit.broadcastMessage("§e" + player.getDisplayName() + " est mort");
+        }
     }
 }
