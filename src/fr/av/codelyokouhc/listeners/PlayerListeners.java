@@ -29,6 +29,7 @@ public class PlayerListeners implements Listener {
         player.setGameMode(GameMode.ADVENTURE);
 
         if(!main.isState(GState.WAITINGPLAYERS)){
+            e.setJoinMessage(null);
             player.kickPlayer("Partie en cours !\nMerci de patienter en attendant la prochaine partie !");
         }
     }
