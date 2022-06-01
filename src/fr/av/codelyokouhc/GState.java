@@ -1,5 +1,5 @@
 package fr.av.codelyokouhc;
 
 public enum GState {
-    WAITINGPLAYERS, MINING, PVP, FINISH;
+    WAITINGPLAYERS, STARTING, MINING, PVP, FINISH;
 }

@@ -6,3 +6,7 @@ commands:
   tpspawn:
     description: Téléporte tous les joueurs au spawn
     permission: codelyoko.admin
+
+  startGame:
+    description: Lance le jeu
+    permission: codelyoko.admin
