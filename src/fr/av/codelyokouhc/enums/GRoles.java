@@ -1,4 +1,4 @@
-package fr.av.codelyokouhc;
+package fr.av.codelyokouhc.enums;
 
 public enum GRoles {
     Role1,

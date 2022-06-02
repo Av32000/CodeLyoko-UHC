@@ -3,6 +3,8 @@ package fr.av.codelyokouhc;
 import fr.av.codelyokouhc.commands.SetGameSpawnCommand;
 import fr.av.codelyokouhc.commands.StartGameCommand;
 import fr.av.codelyokouhc.commands.TpSpawnCommand;
+import fr.av.codelyokouhc.enums.GRoles;
+import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.listeners.DammageListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
 import org.bukkit.Bukkit;
@@ -13,10 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main extends JavaPlugin {
     private GState state;
@@ -77,5 +76,15 @@ public class Main extends JavaPlugin {
         }else{
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " est mort");
         }
+    }
+
+    public String getPlayerCount() {
+        int count = 0;
+        for (Player player : getServer().getOnlinePlayers()) {
+            if(player.getGameMode() != GameMode.SPECTATOR){
+                count++;
+            }
+        }
+        return String.valueOf(count);
     }
 }

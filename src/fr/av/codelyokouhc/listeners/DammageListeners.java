@@ -1,6 +1,6 @@
 package fr.av.codelyokouhc.listeners;
 
-import fr.av.codelyokouhc.GState;
+import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
 import net.minecraft.server.v1_8_R3.Entity;
 import org.bukkit.entity.Arrow;
@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 
 public class DammageListeners implements Listener {
     Main main;

@@ -1,6 +1,6 @@
 package fr.av.codelyokouhc.commands;
 
-import fr.av.codelyokouhc.GState;
+import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.WaitingPvp;
 import org.bukkit.Bukkit;
@@ -41,5 +41,6 @@ public class StartGameCommand implements CommandExecutor {
         WaitingPvp start = new WaitingPvp(main);
         start.runTaskTimer(main, 0, 20);
         Bukkit.broadcastMessage("§aC'est parti !");
+        main.setState(GState.MINING);
     }
 }
