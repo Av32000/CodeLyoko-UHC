@@ -6,6 +6,7 @@ import fr.av.codelyokouhc.commands.TpSpawnCommand;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.listeners.DammageListeners;
+import fr.av.codelyokouhc.listeners.HealthListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -40,6 +41,7 @@ public class Main extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListeners(this), this);
         pm.registerEvents(new DammageListeners(this), this);
+        pm.registerEvents(new HealthListeners(this), this);
     }
 
     @Override
