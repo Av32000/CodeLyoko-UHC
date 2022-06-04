@@ -29,17 +29,28 @@ public class StartGameCommand implements CommandExecutor {
     }
 
     void Start(){
+        Bukkit.broadcastMessage("Vérification des variables...");
         if(main.getGameSpawn() == null){
             Bukkit.broadcastMessage("§4Impossible de lancer le jeu: Le point de spawn du jeu n'est pas définis (/setGameSpawn)");
             main.setState(GState.WAITINGPLAYERS);
             return;
         }
+        if(main.getLyokoSpawn() == null){
+            Bukkit.broadcastMessage("§4Impossible de lancer le jeu: Le point de spawn du lyoko n'est pas définis (/setLyokoSpawn)");
+            main.setState(GState.WAITINGPLAYERS);
+            return;
+        }
+        Bukkit.broadcastMessage("Variables valides !");
+        Bukkit.broadcastMessage("Préparation des joueurs...");
         for (Player player:Bukkit.getWorld("world").getPlayers()) {
             player.teleport(main.getGameSpawn());
             player.setGameMode(GameMode.SURVIVAL);
         }
+        Bukkit.broadcastMessage("Joueurs prêts !");
+        Bukkit.broadcastMessage("Lancement des taches...");
         WaitingPvp start = new WaitingPvp(main);
         start.runTaskTimer(main, 0, 20);
+        Bukkit.broadcastMessage("Taches lancées !");
         Bukkit.broadcastMessage("§aC'est parti !");
         main.setState(GState.MINING);
     }

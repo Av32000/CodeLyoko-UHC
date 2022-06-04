@@ -14,3 +14,10 @@ commands:
   setGameSpawn:
     description: Set le point d'apparition des joueurs lorsque le jeu se lance
     permission: codelyoko.admin
+
+  setLyokoSpawn:
+    description: Srt le point de spawn dans le lyoko
+    permission: codelyoko.admin
+
+  overworld:
+    description: Téléporte un joueur du loko vers l'overworld

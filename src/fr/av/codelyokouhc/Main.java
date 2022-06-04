@@ -1,8 +1,6 @@
 package fr.av.codelyokouhc;
 
-import fr.av.codelyokouhc.commands.SetGameSpawnCommand;
-import fr.av.codelyokouhc.commands.StartGameCommand;
-import fr.av.codelyokouhc.commands.TpSpawnCommand;
+import fr.av.codelyokouhc.commands.*;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.listeners.DammageListeners;
@@ -21,8 +19,10 @@ import java.util.*;
 public class Main extends JavaPlugin {
     private GState state;
     private Location gameSpawn;
+    private Location lyokoSpawn;
     private Map<Player, GRoles> roles = new HashMap<>();
     private List<GRoles> nonAttribuateRoles = new ArrayList<>();
+    private List<Player> inLyokoPlayer = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -32,6 +32,8 @@ public class Main extends JavaPlugin {
         getCommand("tpspawn").setExecutor(new TpSpawnCommand());
         getCommand("startGame").setExecutor(new StartGameCommand(this));
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
+        getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
+        getCommand("overworld").setExecutor(new OverworldCommand(this));
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
@@ -83,7 +85,12 @@ public class Main extends JavaPlugin {
     public List<GRoles> getNonAttribuateRoles() {
         return nonAttribuateRoles;
     }
-
+    public Location getLyokoSpawn() {
+        return lyokoSpawn;
+    }
+    public void setLyokoSpawn(Location lyokoSpawn) {
+        this.lyokoSpawn = lyokoSpawn;
+    }
 
     public void eliminate(Player player){
         player.setGameMode(GameMode.SPECTATOR);
@@ -103,5 +110,18 @@ public class Main extends JavaPlugin {
             }
         }
         return String.valueOf(count);
+    }
+
+    public void addPlayerLyoko(Player player){
+        if(!inLyokoPlayer.contains(player)) inLyokoPlayer.add(player);
+    }
+
+    public void removePlayerLyoko(Player player){
+        if(inLyokoPlayer.contains(player)) inLyokoPlayer.remove(player);
+    }
+
+    public boolean isInLyoko(Player player){
+        if(inLyokoPlayer.contains(player)) return true;
+        return false;
     }
 }
