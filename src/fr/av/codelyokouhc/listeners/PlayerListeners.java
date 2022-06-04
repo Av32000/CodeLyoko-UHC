@@ -37,6 +37,20 @@ public class PlayerListeners implements Listener {
         Location spawn = Bukkit.getWorld("world").getSpawnLocation();
         player.teleport(spawn);
 
+        org.bukkit.scoreboard.Scoreboard board = player.getScoreboard();
+        Objective objective = board.getObjective("healthCount");
+        if (objective == null) {
+            objective = board.registerNewObjective("healthCount", "health");
+            player.damage(2);
+            objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+        }else{
+            objective.unregister();
+            objective = board.registerNewObjective("healthCount", "health");
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            player.damage(2);
+            objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+        }
+
         player.getInventory().clear();
         player.setFoodLevel(20);
         player.setHealth(20);

@@ -9,9 +9,7 @@ import java.util.Map;
 public class ScoreboardManagerUtils {
     ScoreboardManager manager = Bukkit.getScoreboardManager();
     public void AddScoreBordToPlayer(Player player, Map<String, Integer> values) {
-        Scoreboard board = manager.getNewScoreboard();
-        Team team = board.registerNewTeam(player.getDisplayName());
-        team.addPlayer(player);
+        Scoreboard board = player.getScoreboard();
         Objective objective = board.registerNewObjective("Code Lyoko UHC", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         objective.setDisplayName("§bCode Lyoko UHC");
