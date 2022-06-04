@@ -34,9 +34,24 @@ public class Main extends JavaPlugin {
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
 
         setState(GState.WAITINGPLAYERS);
-        nonAttribuateRoles.add(GRoles.Role1);
-        nonAttribuateRoles.add(GRoles.Role2);
-        nonAttribuateRoles.add(GRoles.Role3);
+        nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
+        nonAttribuateRoles.add(GRoles.FranzHoppe);
+        nonAttribuateRoles.add(GRoles.JeanPierreDelmas);
+        nonAttribuateRoles.add(GRoles.JeremyBelpois);
+        nonAttribuateRoles.add(GRoles.JimMoralés);
+        nonAttribuateRoles.add(GRoles.MillySolovieff);
+        nonAttribuateRoles.add(GRoles.TamiyaDiop);
+        nonAttribuateRoles.add(GRoles.Odd);
+        nonAttribuateRoles.add(GRoles.Kiwi);
+        nonAttribuateRoles.add(GRoles.Hervé);
+        nonAttribuateRoles.add(GRoles.Nicolas);
+        nonAttribuateRoles.add(GRoles.Sisi);
+        nonAttribuateRoles.add(GRoles.SuzanneHertz);
+        nonAttribuateRoles.add(GRoles.UlrichStern);
+        nonAttribuateRoles.add(GRoles.WilliamDunba);
+        nonAttribuateRoles.add(GRoles.YumiIshiyama);
+        nonAttribuateRoles.add(GRoles.MèreDeYumi);
+        nonAttribuateRoles.add(GRoles.PèreDeYumi);
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListeners(this), this);
