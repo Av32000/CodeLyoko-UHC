@@ -88,7 +88,7 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onTpDim(PlayerChangedWorldEvent e){
-        if(e.getFrom().toString() == "world"){
+        if(e.getFrom() == main.getServer().getWorld("world_the_end")){
             return;
         }
         if(e.getPlayer().getWorld().toString() != "world_nether" && e.getPlayer().getWorld().toString() != "world"){
