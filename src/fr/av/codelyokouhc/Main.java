@@ -1,5 +1,6 @@
 package fr.av.codelyokouhc;
 
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import fr.av.codelyokouhc.commands.*;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
@@ -11,6 +12,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,6 +36,8 @@ public class Main extends JavaPlugin {
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("overworld").setExecutor(new OverworldCommand(this));
+        getCommand("generateUsine").setExecutor(new GenerateUsineCommand(this));
+
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
@@ -123,5 +127,11 @@ public class Main extends JavaPlugin {
     public boolean isInLyoko(Player player){
         if(inLyokoPlayer.contains(player)) return true;
         return false;
+    }
+
+    public WorldEditPlugin getWorldEdit(){
+        Plugin p = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
+        if(p instanceof WorldEditPlugin) return (WorldEditPlugin) p;
+        else return null;
     }
 }

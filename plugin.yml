@@ -21,3 +21,6 @@ commands:
 
   overworld:
     description: Téléporte un joueur du loko vers l'overworld
+
+  generateUsine:
+    description: Génère l'usine
