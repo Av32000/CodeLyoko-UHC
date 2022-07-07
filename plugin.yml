@@ -2,6 +2,7 @@ name: CodeLyokoUHC
 version: 1.0
 author: Av32000/RedFly32
 main: fr.av.codelyokouhc.Main
+depend: [WorldEdit]
 commands:
   tpspawn:
     description: Téléporte tous les joueurs au spawn
@@ -21,6 +22,3 @@ commands:
 
   overworld:
     description: Téléporte un joueur du loko vers l'overworld
-
-  generateUsine:
-    description: Génère l'usine

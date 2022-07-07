@@ -1,6 +1,13 @@
 package fr.av.codelyokouhc;
 
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.schematic.MCEditSchematicFormat;
+import com.sk89q.worldedit.world.DataException;
 import fr.av.codelyokouhc.commands.*;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
@@ -16,6 +23,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Main extends JavaPlugin {
@@ -30,14 +39,19 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         System.out.println("Code Lyoko est pret !");
+        if(Bukkit.getAllowNether()) System.out.println("§c!WARNING! Nether is enable !");
 
         getCommand("tpspawn").setExecutor(new TpSpawnCommand());
         getCommand("startGame").setExecutor(new StartGameCommand(this));
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("overworld").setExecutor(new OverworldCommand(this));
-        getCommand("generateUsine").setExecutor(new GenerateUsineCommand(this));
 
+        Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
+        int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
+        factorySpawn = new Location(factorySpawn.getWorld(), factorySpawn.getX(), y, factorySpawn.getZ());
+        System.out.println(factorySpawn);
+        generateFactory(factorySpawn);
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
@@ -133,5 +147,18 @@ public class Main extends JavaPlugin {
         Plugin p = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
         if(p instanceof WorldEditPlugin) return (WorldEditPlugin) p;
         else return null;
+    }
+
+    private void generateFactory(Location location){
+        WorldEditPlugin worldEdit = getWorldEdit();
+        File shematic = new File(getDataFolder(), "factory.schematic");
+        EditSession session = worldEdit.getWorldEdit().getEditSessionFactory().getEditSession(new BukkitWorld(location.getWorld()), 999999);
+        try{
+            CuboidClipboard clipboard = MCEditSchematicFormat.getFormat(shematic).load(shematic);
+            clipboard.rotate2D(90);
+            clipboard.paste(session, new Vector(location.getX(),location.getY(), location.getZ()), false);
+        }catch (MaxChangedBlocksException | DataException | IOException e){
+            e.printStackTrace();
+        }
     }
 }

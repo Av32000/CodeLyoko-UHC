@@ -4,8 +4,8 @@
     <root id="archive" name="CodeLyoko UHC.jar">
       <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
       <element id="module-output" name="CodeLyoko-UHC" />
-      <element id="library" level="project" name="spigot-1.8.8" />
       <element id="library" level="project" name="worldedit-bukkit-6.1" />
+      <element id="library" level="project" name="spigot-1.8.8" />
     </root>
   </artifact>
 </component>
