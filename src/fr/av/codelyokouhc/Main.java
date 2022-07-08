@@ -39,7 +39,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         System.out.println("Code Lyoko est pret !");
-        if(Bukkit.getAllowNether()) System.out.println("§c!WARNING! Nether is enable !");
+        if(Bukkit.getAllowNether()) System.out.println("/!\\WARNING/!\\ Nether is enable !");
 
         getCommand("tpspawn").setExecutor(new TpSpawnCommand());
         getCommand("startGame").setExecutor(new StartGameCommand(this));
@@ -113,11 +113,13 @@ public class Main extends JavaPlugin {
     public void eliminate(Player player){
         player.setGameMode(GameMode.SPECTATOR);
         player.playSound(player.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
+        Bukkit.broadcastMessage("§c====================");
         if(roles.containsKey(player)){
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " a été tué ! Il était " + roles.get(player).toString());
         }else{
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " est mort");
         }
+        Bukkit.broadcastMessage("§c====================");
     }
 
     public String getPlayerCount() {

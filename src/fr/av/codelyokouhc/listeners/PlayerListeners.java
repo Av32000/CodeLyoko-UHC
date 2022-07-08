@@ -1,26 +1,22 @@
 package fr.av.codelyokouhc.listeners;
 
-import com.sun.javafx.sg.prism.NodeEffectInput;
 import fr.av.codelyokouhc.ScoreboardManagerUtils;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.world.ChunkPopulateEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class PlayerListeners implements Listener {
     private Main main;
@@ -87,6 +83,18 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
+    public void onGenerateBiome(ChunkPopulateEvent e){
+        if(e.getChunk().getX() > 125 || e.getChunk().getX() < -125){
+            return;
+        }
+        if(e.getChunk().getZ() > 125 || e.getChunk().getZ() < -125){
+            return;
+        }
+        Chunk chunk = e.getChunk();
+        populate(chunk.getWorld(), new Random(), chunk);
+    }
+
+    @EventHandler
     public void onTpDim(PlayerChangedWorldEvent e){
         if(e.getFrom() == main.getServer().getWorld("world_the_end")){
             return;
@@ -95,6 +103,20 @@ public class PlayerListeners implements Listener {
             e.getPlayer().teleport(main.getLyokoSpawn());
             e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
             main.addPlayerLyoko(e.getPlayer());
+        }
+    }
+
+    public void populate(World world, Random random, Chunk source) {
+        int numTrees = 50;
+
+        for (int i = 0; i < numTrees; ++i) {
+            int x = random.nextInt(16) + source.getX() * 16;
+            int z = random.nextInt(16) + source.getZ() * 16;
+            int y = world.getHighestBlockYAt(x, z);
+
+            if (y != 0) {
+                world.generateTree(new Location(world, x, y, z), TreeType.TREE);
+            }
         }
     }
 }
