@@ -21,7 +21,6 @@ public class OverworldCommand implements CommandExecutor {
                 player.sendMessage("§eBienvenue dans l'overworld !");
                 main.removePlayerLyoko(player);
                 return true;
-
             }else{
                 player.sendMessage("§4&Vous etes déjà dans l'overworld");
             }

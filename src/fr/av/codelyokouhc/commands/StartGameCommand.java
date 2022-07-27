@@ -2,7 +2,7 @@ package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
-import fr.av.codelyokouhc.WaitingPvp;
+import fr.av.codelyokouhc.GameLoop;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -45,10 +45,11 @@ public class StartGameCommand implements CommandExecutor {
         for (Player player:Bukkit.getWorld("world").getPlayers()) {
             player.teleport(main.getGameSpawn());
             player.setGameMode(GameMode.SURVIVAL);
+            player.getWorld().setTime(0);
         }
         Bukkit.broadcastMessage("Joueurs prêts !");
         Bukkit.broadcastMessage("Lancement des taches...");
-        WaitingPvp start = new WaitingPvp(main);
+        GameLoop start = new GameLoop(main);
         start.runTaskTimer(main, 0, 20);
         Bukkit.broadcastMessage("Taches lancées !");
         Bukkit.broadcastMessage("§aC'est parti !");

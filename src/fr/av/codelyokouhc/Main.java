@@ -34,6 +34,7 @@ public class Main extends JavaPlugin {
     private Map<Player, GRoles> roles = new HashMap<>();
     private List<GRoles> nonAttribuateRoles = new ArrayList<>();
     private List<Player> inLyokoPlayer = new ArrayList<>();
+    private int episode = 0;
 
     @Override
     public void onEnable() {
@@ -108,6 +109,12 @@ public class Main extends JavaPlugin {
     }
     public void setLyokoSpawn(Location lyokoSpawn) {
         this.lyokoSpawn = lyokoSpawn;
+    }
+    public int getEpisode() {
+        return episode;
+    }
+    public void setEpisode(int episode) {
+        this.episode = episode;
     }
 
     public void eliminate(Player player){
