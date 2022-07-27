@@ -2,6 +2,7 @@ package fr.av.codelyokouhc;
 
 import fr.av.codelyokouhc.enums.GState;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,6 +32,14 @@ public class WaitingPvp extends BukkitRunnable {
         if(pvp == 0 && pvpsSec == 0 && !endPvp){
             main.setState(GState.PVP);
             endPvp = true;
+            for (Player player : main.getServer().getOnlinePlayers()) {
+                if(player.getGameMode() == GameMode.SURVIVAL){
+                    player.sendMessage("§4====================");
+                    player.sendMessage("/!\\ Le PVP est actif ! /!\\");
+                    player.sendMessage("§4====================");
+                    player.playSound(player.getLocation(), Sound.BLAZE_BREATH, 1.0f, 1.0f);
+                }
+            }
         }
         if(roleSec == 0 && !endRole){
             role--;
@@ -55,7 +64,10 @@ public class WaitingPvp extends BukkitRunnable {
                 int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
-                player.sendMessage("Vous etes : " + main.getRoles().get(player).toString());
+                player.sendMessage("§a====================");
+                player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
+                player.sendMessage("§a====================");
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             }
         }
     }
