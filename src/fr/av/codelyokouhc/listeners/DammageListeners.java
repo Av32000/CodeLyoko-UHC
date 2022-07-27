@@ -30,17 +30,19 @@ public class DammageListeners implements Listener {
 
     @EventHandler
     public void onPvp(EntityDamageByEntityEvent e){
-        Entity killer = (Entity) e.getDamager();
+        if(!(e.getEntity() instanceof Player)){
+            return;
+        }
 
-        if(killer instanceof Player){
+        if(e.getDamager() instanceof Player){
             if(!main.isState(GState.PVP)){
                 e.setCancelled(true);
                 return;
             }
         }
 
-        if(killer instanceof Arrow){
-            Arrow arrow = (Arrow) killer;
+        if(e.getDamager() instanceof Arrow){
+            Arrow arrow = (Arrow) e.getDamager();
             if(arrow.getShooter() instanceof Player){
                 if(!main.isState(GState.PVP)){
                     e.setCancelled(true);
@@ -49,8 +51,8 @@ public class DammageListeners implements Listener {
             }
         }
 
-        if(killer instanceof Fireball){
-            Fireball fireball = (Fireball) killer;
+        if(e.getDamager() instanceof Fireball){
+            Fireball fireball = (Fireball) e.getDamager();
             if(fireball.getShooter() instanceof Player){
                 if(!main.isState(GState.PVP)){
                     e.setCancelled(true);
