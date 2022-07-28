@@ -1,9 +1,15 @@
 package fr.av.codelyokouhc;
 
+import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -13,7 +19,7 @@ import java.util.Random;
 public class GameLoop extends BukkitRunnable {
     Main main;
     private int role = 0;
-    private int roleSec = 59;
+    private int roleSec = 10;
     private int pvp = 1;
     private int pvpsSec = 59;
     private Boolean endRole = false;
@@ -73,13 +79,65 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
+                //int index = 0;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
+                ConfigPlayer(player);
                 player.sendMessage("§a====================");
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
                 player.sendMessage("§a====================");
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             }
+        }
+    }
+
+    void ConfigPlayer(Player player){
+        GRoles role = main.getRoles().get(player);
+        switch (role){
+            case AelitaSchaeffer:
+                ItemStack bow = new ItemStack(Material.BOW, 1);
+                bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+                bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+                bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+                bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+                player.setMaxHealth(14);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 2, false, false));
+                player.getInventory().addItem(bow);
+                break;
+            case FranzHoppe:
+                break;
+            case JeanPierreDelmas:
+                break;
+            case JeremyBelpois:
+                break;
+            case JimMoralés:
+                break;
+            case MillySolovieff:
+                break;
+            case TamiyaDiop:
+                break;
+            case Odd:
+                break;
+            case Kiwi:
+                break;
+            case Hervé:
+                break;
+            case Nicolas:
+                break;
+            case Sisi:
+                break;
+            case SuzanneHertz:
+                break;
+            case UlrichStern:
+                break;
+            case WilliamDunba:
+                break;
+            case YumiIshiyama:
+                break;
+            case MèreDeYumi:
+                break;
+            case PèreDeYumi:
+                break;
         }
     }
 
