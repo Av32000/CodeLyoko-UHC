@@ -79,7 +79,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 4;
+                int index = 3;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -109,6 +109,7 @@ public class GameLoop extends BukkitRunnable {
             case JeanPierreDelmas:
                 break;
             case JeremyBelpois:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 0, false, false));
                 break;
             case JimMoralés:
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 0, false, false));
@@ -214,7 +215,7 @@ public class GameLoop extends BukkitRunnable {
                 Map<String,Integer> values = new HashMap<>();
                 values.put(" ", 7);
                 if(endRole){
-                    values.put("§eRoles : §aRévélées", 6);
+                    values.put("§eRoles : §aRévélés", 6);
                 }else{
                     String text = "";
                     if(role < 10){
