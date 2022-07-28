@@ -6,6 +6,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -79,7 +80,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 7;
+                int index = 8;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -123,6 +124,10 @@ public class GameLoop extends BukkitRunnable {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, 1, false, false));
                 break;
             case Kiwi:
+                ItemStack pickaxe = new ItemStack(Material.DIAMOND_PICKAXE);
+                pickaxe.addEnchantment(Enchantment.DIG_SPEED, 2);
+                player.getInventory().addItem(pickaxe);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 1, false, false));
                 break;
             case Hervé:
                 break;
