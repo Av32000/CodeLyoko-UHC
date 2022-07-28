@@ -79,7 +79,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 3;
+                int index = 7;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -120,6 +120,7 @@ public class GameLoop extends BukkitRunnable {
             case TamiyaDiop:
                 break;
             case Odd:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, 1, false, false));
                 break;
             case Kiwi:
                 break;
