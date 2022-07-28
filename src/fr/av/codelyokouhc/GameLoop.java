@@ -80,7 +80,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 10;
+                int index = 16;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -125,7 +125,7 @@ public class GameLoop extends BukkitRunnable {
                 break;
             case Kiwi:
                 ItemStack pickaxe = new ItemStack(Material.DIAMOND_PICKAXE);
-                pickaxe.addEnchantment(Enchantment.DIG_SPEED, 2);
+                pickaxe.addEnchantment(Enchantment.DIG_SPEED, 3);
                 player.getInventory().addItem(pickaxe);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 1, false, false));
                 break;
@@ -133,19 +133,19 @@ public class GameLoop extends BukkitRunnable {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999999, 0,false, false));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0,false, false));
                 break;
-            case Sisi:
-                break;
-            case SuzanneHertz:
-                break;
             case UlrichStern:
                 break;
             case WilliamDunba:
                 break;
             case YumiIshiyama:
+                player.setMaxHealth(28);
+                player.setHealth(28);
                 break;
             case MèreDeYumi:
-                break;
             case PèreDeYumi:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0,false, false));
+                ItemStack gaps = new ItemStack(Material.GOLDEN_APPLE, 5);
+                player.getInventory().addItem(gaps);
                 break;
         }
     }
