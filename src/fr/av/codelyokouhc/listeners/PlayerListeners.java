@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkPopulateEvent;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 
@@ -52,10 +53,19 @@ public class PlayerListeners implements Listener {
 
         player.getInventory().clear();
         player.setFoodLevel(20);
+        player.setLevel(0);
+        player.setMaxHealth(20);
         player.setHealth(20);
+        RemovePotionEffect(player);
         player.setGameMode(GameMode.ADVENTURE);
 
         UpdatePLayersScoreBoard();
+    }
+
+    private void RemovePotionEffect(Player player){
+        for (PotionEffect effect:player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
+        }
     }
 
     @EventHandler

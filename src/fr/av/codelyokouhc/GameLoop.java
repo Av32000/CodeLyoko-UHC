@@ -78,8 +78,8 @@ public class GameLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                //int index = 0;
+                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
+                int index = 4;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -101,7 +101,7 @@ public class GameLoop extends BukkitRunnable {
                 bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
                 bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
                 player.setMaxHealth(14);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 2, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 1, false, false));
                 player.getInventory().addItem(bow);
                 break;
             case FranzHoppe:
@@ -111,6 +111,8 @@ public class GameLoop extends BukkitRunnable {
             case JeremyBelpois:
                 break;
             case JimMoralés:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 0, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999999, 1,false, false));
                 break;
             case MillySolovieff:
                 break;
