@@ -80,7 +80,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 8;
+                int index = 10;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -129,9 +129,9 @@ public class GameLoop extends BukkitRunnable {
                 player.getInventory().addItem(pickaxe);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 1, false, false));
                 break;
-            case Hervé:
-                break;
             case Nicolas:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999999, 0,false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0,false, false));
                 break;
             case Sisi:
                 break;
