@@ -22,10 +22,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Main extends JavaPlugin {
     private GState state;
@@ -47,6 +50,7 @@ public class Main extends JavaPlugin {
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("overworld").setExecutor(new OverworldCommand(this));
+        getCommand("getRole").setExecutor(new GetRoleCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
@@ -127,6 +131,35 @@ public class Main extends JavaPlugin {
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " est mort");
         }
         Bukkit.broadcastMessage("§c====================");
+
+
+        //Special DeathEvents
+        if(roles.get(player) == GRoles.Odd && getPlayerByRole(GRoles.Kiwi) != null && getPlayerByRole(GRoles.Kiwi).getGameMode() == GameMode.SURVIVAL){
+            Player kiwi = getPlayerByRole(GRoles.Kiwi);
+            kiwi.setMaxHealth(16);
+            kiwi.setHealth(16);
+            kiwi.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 999999999,0, false, false));
+            getPlayerByRole(GRoles.Kiwi).sendMessage("§eOdd est mort, votre boussole pointe désormais le 0 0");
+        }
+        if(roles.get(player) == GRoles.Kiwi && getPlayerByRole(GRoles.Odd) != null && getPlayerByRole(GRoles.Odd).getGameMode() == GameMode.SURVIVAL){
+            if(playerIsAt(player, getPlayerByRole(GRoles.Odd), 30)) getPlayerByRole(GRoles.Odd).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999,1, false, false));
+        }
+    }
+
+    public Boolean playerIsAt(Player player1, Player player2, float dist){
+        return player2.getLocation().distanceSquared(player1.getLocation()) <= (dist * dist);
+    }
+
+    public <V> Player getPlayerByRole(V value) {
+        return getRoles()
+                .entrySet()
+                .stream()
+                .filter(entry -> value.equals(entry.getValue()))
+                .map(Map.Entry::getKey).findFirst().get();
+    }
+
+    public boolean isDay(){
+        return getServer().getWorld("world").getTime() < 12300 || getServer().getWorld("world").getTime() > 23850;
     }
 
     public String getPlayerCount() {

@@ -17,7 +17,11 @@ commands:
     permission: codelyoko.admin
 
   setLyokoSpawn:
-    description: Srt le point de spawn dans le lyoko
+    description: Set le point de spawn dans le lyoko
+    permission: codelyoko.admin
+
+  getRole:
+    description: Retourne le rôle d'un joueur
     permission: codelyoko.admin
 
   overworld:

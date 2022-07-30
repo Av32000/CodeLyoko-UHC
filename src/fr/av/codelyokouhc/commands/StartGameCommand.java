@@ -2,7 +2,7 @@ package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
-import fr.av.codelyokouhc.GameLoop;
+import fr.av.codelyokouhc.loops.GameLoop;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
