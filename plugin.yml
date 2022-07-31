@@ -26,3 +26,6 @@ commands:
 
   overworld:
     description: Téléporte un joueur du loko vers l'overworld
+
+  hide:
+    description: Rends le joueur invisible pendant un certain temps (Selon son rôle)

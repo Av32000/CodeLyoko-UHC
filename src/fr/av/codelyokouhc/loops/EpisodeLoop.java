@@ -25,6 +25,7 @@ public class EpisodeLoop extends BukkitRunnable {
 
     public void NewEpisode(){
         main.setEpisode(main.getEpisode() + 1);
+        main.setJeremyCanVanish(true);
         Bukkit.broadcastMessage("§b==========[Episode " + main.getEpisode() + "]==========");
         for (Player player : main.getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);

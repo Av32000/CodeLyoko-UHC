@@ -40,6 +40,11 @@ public class Main extends JavaPlugin {
     private List<Player> inLyokoPlayer = new ArrayList<>();
     private int episode = 0;
 
+    //Reset when episode change
+    private boolean jeremyCanVanish = true;
+
+    public int ulrichHide = 10;
+
     @Override
     public void onEnable() {
         super.onEnable();
@@ -52,6 +57,7 @@ public class Main extends JavaPlugin {
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("overworld").setExecutor(new OverworldCommand(this));
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
+        getCommand("hide").setExecutor(new HideCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
@@ -120,6 +126,12 @@ public class Main extends JavaPlugin {
     }
     public void setEpisode(int episode) {
         this.episode = episode;
+    }
+    public boolean jeremyCanVanish() {
+        return jeremyCanVanish;
+    }
+    public void setJeremyCanVanish(boolean jeremyCanVanish) {
+        this.jeremyCanVanish = jeremyCanVanish;
     }
 
     public void eliminate(Player player){
