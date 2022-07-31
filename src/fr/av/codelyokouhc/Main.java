@@ -14,6 +14,7 @@ import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.listeners.DammageListeners;
 import fr.av.codelyokouhc.listeners.HealthListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
+import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -44,6 +45,8 @@ public class Main extends JavaPlugin {
     private boolean jeremyCanVanish = true;
 
     public int ulrichHide = 10;
+    public int jeremyRevive = 2;
+    public Map<Player, Location> killedPlayer = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -58,6 +61,7 @@ public class Main extends JavaPlugin {
         getCommand("overworld").setExecutor(new OverworldCommand(this));
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
         getCommand("hide").setExecutor(new HideCommand(this));
+        getCommand("revive").setExecutor(new ReviveCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
@@ -135,6 +139,9 @@ public class Main extends JavaPlugin {
     }
 
     public void eliminate(Player player){
+        killedPlayer.put(player, player.getLocation());
+        RemoveKilledPlayerLoop rkpl = new RemoveKilledPlayerLoop(this, player);
+        rkpl.runTaskTimer(this, 1,20);
         player.setGameMode(GameMode.SPECTATOR);
         player.playSound(player.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
         Bukkit.broadcastMessage("§c====================");
@@ -144,7 +151,6 @@ public class Main extends JavaPlugin {
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " est mort");
         }
         Bukkit.broadcastMessage("§c====================");
-
 
         //Special DeathEvents
         if(roles.get(player) == GRoles.Odd && getPlayerByRole(GRoles.Kiwi) != null && getPlayerByRole(GRoles.Kiwi).getGameMode() == GameMode.SURVIVAL){

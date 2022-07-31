@@ -53,6 +53,6 @@ public class HideCommand implements CommandExecutor {
         else{
             player.sendMessage("§cVous n'avez pas ce pouvoir !");
         }
-        return false;
+        return true;
     }
 }

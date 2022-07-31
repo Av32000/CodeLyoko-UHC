@@ -84,7 +84,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 13;
+                int index = 3;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
