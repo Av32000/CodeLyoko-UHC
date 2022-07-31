@@ -28,6 +28,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class Main extends JavaPlugin {
@@ -144,6 +145,18 @@ public class Main extends JavaPlugin {
         if(roles.get(player) == GRoles.Kiwi && getPlayerByRole(GRoles.Odd) != null && getPlayerByRole(GRoles.Odd).getGameMode() == GameMode.SURVIVAL){
             if(playerIsAt(player, getPlayerByRole(GRoles.Odd), 30)) getPlayerByRole(GRoles.Odd).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999,1, false, false));
         }
+        if(roles.get(player) == GRoles.YumiIshiyama){
+            if(getPlayerByRole(GRoles.PèreDeYumi) == null && getPlayerByRole(GRoles.PèreDeYumi).getGameMode() == GameMode.SURVIVAL) getPlayerByRole(GRoles.PèreDeYumi).sendMessage("§eYumi est morte, votre boussole pointe désormais le 0 0");
+            if(getPlayerByRole(GRoles.MèreDeYumi) == null && getPlayerByRole(GRoles.MèreDeYumi).getGameMode() == GameMode.SURVIVAL) getPlayerByRole(GRoles.MèreDeYumi).sendMessage("§eYumi est morte, votre boussole pointe désormais le 0 0");
+        }
+
+        if(roles.get(player) == GRoles.MèreDeYumi || roles.get(player) == GRoles.PèreDeYumi){
+            if(getPlayerByRole(GRoles.YumiIshiyama) != null && getPlayerByRole(GRoles.YumiIshiyama).getGameMode() == GameMode.SURVIVAL) {
+                Player yumi = getPlayerByRole(GRoles.YumiIshiyama);
+                yumi.setMaxHealth(yumi.getMaxHealth() - 6);
+                yumi.setHealth(yumi.getMaxHealth());
+            }
+        }
     }
 
     public Boolean playerIsAt(Player player1, Player player2, float dist){
@@ -151,11 +164,14 @@ public class Main extends JavaPlugin {
     }
 
     public <V> Player getPlayerByRole(V value) {
-        return getRoles()
+        Supplier<Stream<Object>> result = () -> getRoles()
                 .entrySet()
                 .stream()
                 .filter(entry -> value.equals(entry.getValue()))
-                .map(Map.Entry::getKey).findFirst().get();
+                .map(Map.Entry::getKey);
+
+        if(result.get().count() > 0) return (Player) result.get().findFirst().get();
+        else return null;
     }
 
     public boolean isDay(){

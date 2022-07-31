@@ -39,5 +39,23 @@ public class RolesLoop extends BukkitRunnable {
                 odd.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             }
         }
+
+        //Mère de Yumi
+        if(main.getPlayerByRole(GRoles.MèreDeYumi) != null && main.getPlayerByRole(GRoles.YumiIshiyama) != null){
+            Player mère = main.getPlayerByRole(GRoles.MèreDeYumi);
+            Player yumi = main.getPlayerByRole(GRoles.YumiIshiyama);
+
+            if(yumi.getGameMode() == GameMode.SURVIVAL) mère.setCompassTarget(yumi.getLocation());
+            else mère.setCompassTarget(new Location(mère.getWorld(),0,0,0));
+        }
+
+        //Père de Yumi
+        if(main.getPlayerByRole(GRoles.PèreDeYumi) != null && main.getPlayerByRole(GRoles.YumiIshiyama) != null){
+            Player père = main.getPlayerByRole(GRoles.PèreDeYumi);
+            Player yumi = main.getPlayerByRole(GRoles.YumiIshiyama);
+
+            if(yumi.getGameMode() == GameMode.SURVIVAL) père.setCompassTarget(yumi.getLocation());
+            else père.setCompassTarget(new Location(père.getWorld(),0,0,0));
+        }
     }
 }

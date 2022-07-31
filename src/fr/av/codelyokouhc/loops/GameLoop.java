@@ -84,7 +84,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 7;
+                int index = 15;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -151,6 +151,7 @@ public class GameLoop extends BukkitRunnable {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0,false, false));
                 ItemStack gaps = new ItemStack(Material.GOLDEN_APPLE, 5);
                 player.getInventory().addItem(gaps);
+                player.getInventory().addItem(new ItemStack(Material.COMPASS));
                 break;
         }
     }
