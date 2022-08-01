@@ -58,10 +58,8 @@ public class Main extends JavaPlugin {
         getCommand("startGame").setExecutor(new StartGameCommand(this));
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
-        getCommand("overworld").setExecutor(new OverworldCommand(this));
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
-        getCommand("hide").setExecutor(new HideCommand(this));
-        getCommand("revive").setExecutor(new ReviveCommand(this));
+        getCommand("cl").setExecutor(new CLCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);

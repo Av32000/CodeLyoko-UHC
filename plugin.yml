@@ -24,11 +24,5 @@ commands:
     description: Retourne le rôle d'un joueur
     permission: codelyoko.admin
 
-  overworld:
-    description: Téléporte un joueur du loko vers l'overworld
-
-  hide:
-    description: Rends le joueur invisible pendant un certain temps (Selon son rôle)
-
-  revive:
-    description: Permet à Jeremy Belpois de réanimer tous les joueurs morts dans les 60 dèrnières secondes (Utilisable 2 fois par game)
+  cl:
+    description: Commandes relatives au CodeLyoko-UHC
