@@ -22,9 +22,7 @@ public class VanishLoop extends BukkitRunnable {
     public void run() {
         if(timer <= 0){
             for (Player pl : main.getServer().getOnlinePlayers()) {
-                if(pl.getGameMode() == GameMode.SURVIVAL){
-                    pl.showPlayer(player);
-                }
+                pl.showPlayer(player);
             }
             if(main.getRoles().get(player) == GRoles.JeremyBelpois) player.removePotionEffect(PotionEffectType.SLOW);
             player.sendMessage("§c Vous êtes de nouveau visible !");

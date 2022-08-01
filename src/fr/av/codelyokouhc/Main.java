@@ -14,6 +14,7 @@ import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.listeners.DammageListeners;
 import fr.av.codelyokouhc.listeners.HealthListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
+import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -46,6 +47,9 @@ public class Main extends JavaPlugin {
 
     public int ulrichHide = 10;
     public int jeremyRevive = 2;
+    public boolean tamiyaAsk = true;
+    public Player tamiyaTarget = null;
+    public AnswerLoop tamiyaAnswerLoop = null;
     public Map<Player, Location> killedPlayer = new HashMap<>();
 
     @Override
@@ -141,7 +145,9 @@ public class Main extends JavaPlugin {
         RemoveKilledPlayerLoop rkpl = new RemoveKilledPlayerLoop(this, player);
         rkpl.runTaskTimer(this, 1,20);
         player.setGameMode(GameMode.SPECTATOR);
-        player.playSound(player.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
+        for (Player p : getServer().getOnlinePlayers()) {
+            p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
+        }
         Bukkit.broadcastMessage("§c====================");
         if(roles.containsKey(player)){
             Bukkit.broadcastMessage("§e" + player.getDisplayName() + " a été tué ! Il était " + roles.get(player).toString());

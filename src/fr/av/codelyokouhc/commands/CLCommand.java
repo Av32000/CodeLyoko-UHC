@@ -28,6 +28,9 @@ public class CLCommand implements CommandExecutor {
         } else if (strings[0].equalsIgnoreCase("revive")) {
             ReviveCommand reviveCommand = new ReviveCommand(main);
             reviveCommand.onCommand(commandSender, command, s,strings);
+        } else if (strings[0].equalsIgnoreCase("ask")) {
+            AskCommand askCommand = new AskCommand(main);
+            askCommand.onCommand(commandSender, command, s,strings);
         } else{
             commandSender.sendMessage("§cCet argument n'existe pas (Voir /cl help)");
         }
@@ -39,8 +42,9 @@ public class CLCommand implements CommandExecutor {
         if(main.getRoles().size() != 0) commandSender.sendMessage("§6Vous êtes : " + main.getRoles().get(commandSender).toString());
         commandSender.sendMessage("");
         commandSender.sendMessage("§d/cl help §f=> §bAffiche ce message");
-        commandSender.sendMessage("§d/cl hide §f=> §bRends le joueur invisible pendant un certain temps (Selon son rôle)");
+        commandSender.sendMessage("§d/cl hide §f=> §bRends le joueur invisible pendant un certain temps");
         commandSender.sendMessage("§d/cl overworld §f=> §bTéléporte le joueur du lyoko vers l'overworld");
         commandSender.sendMessage("§d/cl revive §f=> §bPermet à Jeremy Belpois de réanimer les joueurs morts dans la dèrnière minute (2 fois)");
+        commandSender.sendMessage("§d/cl ask §f=> §bPermet à Tamiya Diop de poser une question à un joueur (15min de cooldown)");
     }
 }

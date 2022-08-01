@@ -1,12 +1,14 @@
 package fr.av.codelyokouhc.listeners;
 
 import fr.av.codelyokouhc.ScoreboardManagerUtils;
+import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -71,6 +73,7 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         UpdatePLayersScoreBoard();
+        e.setQuitMessage(null);
     }
 
     public void UpdatePLayersScoreBoard(){
@@ -113,6 +116,26 @@ public class PlayerListeners implements Listener {
             e.getPlayer().teleport(main.getLyokoSpawn());
             e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
             main.addPlayerLyoko(e.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        if(e.getPlayer() == main.tamiyaTarget){
+            if(e.getMessage().equalsIgnoreCase("oui") || e.getMessage().equalsIgnoreCase("non")){
+                String name = main.tamiyaTarget.getDisplayName();
+                main.tamiyaTarget = null;
+                main.tamiyaAnswerLoop.cancel();
+                Player tamiya = main.getPlayerByRole(GRoles.TamiyaDiop);
+                tamiya.playSound(tamiya.getLocation(), Sound.LEVEL_UP, 1.0f,1.0f);
+                tamiya.sendMessage("§a" + name + "> " + e.getMessage());
+                e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1.0f,1.0f);
+                e.getPlayer().sendMessage("§a" + name + "> " + e.getMessage());
+            }
+            else{
+                e.getPlayer().sendMessage("§cVous devez répondre par oui ou  par non");
+            }
+            e.setCancelled(true);
         }
     }
 
