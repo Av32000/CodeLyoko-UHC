@@ -32,7 +32,7 @@ public class ReviveCommand implements CommandExecutor {
                 player.sendMessage("§cVous avez déjà utilisé votre pouvoir 2 fois !");
             }
         }else{
-            player.sendMessage("$cVous n'avez pas ce pouvoir !");
+            player.sendMessage("§cVous n'avez pas ce pouvoir !");
         }
         return true;
     }

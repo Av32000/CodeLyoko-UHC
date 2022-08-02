@@ -8,11 +8,10 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -136,6 +135,17 @@ public class PlayerListeners implements Listener {
                 e.getPlayer().sendMessage("§cVous devez répondre par oui ou  par non");
             }
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onUseItem(PlayerInteractEvent e){
+        Player p = e.getPlayer();
+        if(p.getHealth() < 10 && p.getItemInHand() != null && p.getItemInHand().getType() == Material.COOKED_BEEF && main.getRoles().size() > 0 && main.getRoles().get(p) == GRoles.Odd){
+            p.setHealth(p.getHealth() + 1);
+            ItemStack newStack = new ItemStack(p.getItemInHand().getType(), p.getItemInHand().getAmount() -1);
+            p.getInventory().remove(p.getItemInHand());
+            p.getInventory().setItemInHand(newStack);
         }
     }
 
