@@ -168,8 +168,8 @@ public class Main extends JavaPlugin {
             if(playerIsAt(player, getPlayerByRole(GRoles.Odd), 30)) getPlayerByRole(GRoles.Odd).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999,1, false, false));
         }
         if(roles.get(player) == GRoles.YumiIshiyama){
-            if(getPlayerByRole(GRoles.PèreDeYumi) == null && getPlayerByRole(GRoles.PèreDeYumi).getGameMode() == GameMode.SURVIVAL) getPlayerByRole(GRoles.PèreDeYumi).sendMessage("§eYumi est morte, votre boussole pointe désormais le 0 0");
-            if(getPlayerByRole(GRoles.MèreDeYumi) == null && getPlayerByRole(GRoles.MèreDeYumi).getGameMode() == GameMode.SURVIVAL) getPlayerByRole(GRoles.MèreDeYumi).sendMessage("§eYumi est morte, votre boussole pointe désormais le 0 0");
+            if(getPlayerByRole(GRoles.PèreDeYumi) == null && getPlayerByRole(GRoles.PèreDeYumi).getGameMode() == GameMode.SURVIVAL) eliminate(getPlayerByRole(GRoles.PèreDeYumi));
+            if(getPlayerByRole(GRoles.MèreDeYumi) == null && getPlayerByRole(GRoles.MèreDeYumi).getGameMode() == GameMode.SURVIVAL) eliminate(getPlayerByRole(GRoles.PèreDeYumi));
         }
 
         if(roles.get(player) == GRoles.MèreDeYumi || roles.get(player) == GRoles.PèreDeYumi){
