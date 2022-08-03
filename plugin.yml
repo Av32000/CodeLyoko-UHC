@@ -24,5 +24,13 @@ commands:
     description: Retourne le rôle d'un joueur
     permission: codelyoko.admin
 
+  lyokoTp:
+    description: Permet de se téléporter dans la dimension du lyoko
+    permission: codelyoko.admin
+
+  spawn:
+    description: Téléporte le joueur au spawn
+    permission: codelyoko.admin
+
   cl:
     description: Commandes relatives au CodeLyoko-UHC

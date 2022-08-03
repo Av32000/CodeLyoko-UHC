@@ -16,10 +16,7 @@ import fr.av.codelyokouhc.listeners.HealthListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
 import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -63,6 +60,8 @@ public class Main extends JavaPlugin {
         getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
+        getCommand("lyokoTp").setExecutor(new LyokoTp(this));
+        getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("cl").setExecutor(new CLCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
@@ -70,6 +69,8 @@ public class Main extends JavaPlugin {
         factorySpawn = new Location(factorySpawn.getWorld(), factorySpawn.getX(), y, factorySpawn.getZ());
         System.out.println(factorySpawn);
         generateFactory(factorySpawn);
+
+        Bukkit.createWorld(new WorldCreator("lyoko"));
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);

@@ -107,14 +107,12 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void onTpDim(PlayerChangedWorldEvent e){
-        if(e.getFrom() == main.getServer().getWorld("world_the_end")){
-            return;
-        }
-        if(e.getPlayer().getWorld().toString() != "world_nether" && e.getPlayer().getWorld().toString() != "world"){
+    public void onTpDim(PlayerPortalEvent e){
+        if(e.getTo().getWorld() == main.getServer().getWorld("world_the_end")){
             e.getPlayer().teleport(main.getLyokoSpawn());
             e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
             main.addPlayerLyoko(e.getPlayer());
+            e.setCancelled(true);
         }
     }
 
