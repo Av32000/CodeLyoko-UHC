@@ -2,10 +2,7 @@ package fr.av.codelyokouhc.loops;
 
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GRoles;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Statistic;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -13,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RolesLoop extends BukkitRunnable {
     Main main;
@@ -102,6 +100,25 @@ public class RolesLoop extends BukkitRunnable {
                     jim.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999, 0, false,false));
                 }
             }
+        }
+
+        //Ulrich Stern
+        if(main.getPlayerByRole(GRoles.UlrichStern) != null && main.ulrichGirl == null){
+            List<Player> girls = new ArrayList<>();
+            if(main.getPlayerByRole(GRoles.AelitaSchaeffer) != null && main.getPlayerByRole(GRoles.AelitaSchaeffer).getGameMode() == GameMode.SURVIVAL) girls.add(main.getPlayerByRole(GRoles.AelitaSchaeffer));
+            if(main.getPlayerByRole(GRoles.MillySolovieff) != null && main.getPlayerByRole(GRoles.MillySolovieff).getGameMode() == GameMode.SURVIVAL) girls.add(main.getPlayerByRole(GRoles.MillySolovieff));
+            if(main.getPlayerByRole(GRoles.TamiyaDiop) != null && main.getPlayerByRole(GRoles.TamiyaDiop).getGameMode() == GameMode.SURVIVAL) girls.add(main.getPlayerByRole(GRoles.TamiyaDiop));
+            if(main.getPlayerByRole(GRoles.Sisi) != null && main.getPlayerByRole(GRoles.Sisi).getGameMode() == GameMode.SURVIVAL) girls.add(main.getPlayerByRole(GRoles.Sisi));
+            if(main.getPlayerByRole(GRoles.SuzanneHertz) != null && main.getPlayerByRole(GRoles.SuzanneHertz).getGameMode() == GameMode.SURVIVAL) girls.add(main.getPlayerByRole(GRoles.SuzanneHertz));
+
+            if(girls.size() == 0) return;
+
+            Player us = (main.getPlayerByRole(GRoles.UlrichStern));
+            main.ulrichGirl = girls.get(new Random().nextInt(girls.size()));
+            us.sendMessage("§d💖Vous êtes en couple avec" + main.ulrichGirl.getDisplayName() +"💖");
+            main.ulrichGirl.sendMessage("§d💖Vous êtes en couple avec" + us.getDisplayName() +"💖");
+            us.playSound(us.getLocation(), Sound.VILLAGER_YES, 1.0f, 1.0f);
+            main.ulrichGirl.playSound(main.ulrichGirl.getLocation(), Sound.VILLAGER_YES, 1.0f, 1.0f);
         }
     }
 

@@ -48,6 +48,7 @@ public class Main extends JavaPlugin {
     public Player tamiyaTarget = null;
     public AnswerLoop tamiyaAnswerLoop = null;
     public Map<Player, Location> killedPlayer = new HashMap<>();
+    public Player ulrichGirl = null;
 
     @Override
     public void onEnable() {
@@ -179,6 +180,19 @@ public class Main extends JavaPlugin {
                 yumi.setMaxHealth(yumi.getMaxHealth() - 6);
                 yumi.setHealth(yumi.getMaxHealth());
             }
+        }
+
+        if(player == ulrichGirl && getPlayerByRole(GRoles.UlrichStern) != null){
+            Player us = getPlayerByRole(GRoles.UlrichStern);
+            us.sendMessage("§cVotre amante est morte. Votre tristesse vous fait tomber à 4 coeurs !");
+            us.setMaxHealth(8);
+            us.setHealth(8);
+        }
+
+        if(roles.get(player) == GRoles.UlrichStern && ulrichGirl != null){
+            ulrichGirl.sendMessage("§cVotre amant est mort. Votre tristesse vous fait tomber à 4 coeurs !");
+            ulrichGirl.setMaxHealth(8);
+            ulrichGirl.setHealth(8);
         }
     }
 
