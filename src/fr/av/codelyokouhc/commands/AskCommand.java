@@ -10,7 +10,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class AskCommand implements CommandExecutor {
         Player player = (Player) commandSender;
         if(main.getRoles().get(player) == GRoles.TamiyaDiop){
             if(main.tamiyaAsk){
-                if(strings.length < 3 || main.getServer().getPlayer(strings[1]) ==null){
+                if(strings.length < 3 || main.getServer().getPlayer(strings[1]) == null){
                     player.sendMessage("§cUtilisation : /cl ask <Player> <Question>");
                 }else{
                     Player target = main.getServer().getPlayer(strings[1]);

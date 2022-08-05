@@ -40,6 +40,9 @@ public class DammageListeners implements Listener {
                 e.setCancelled(true);
                 return;
             }
+            if(main.kankrelats.contains(e.getDamager())){
+                e.getEntity().setFireTicks(1000);
+            }
         }
 
         if(e.getDamager() instanceof Arrow){

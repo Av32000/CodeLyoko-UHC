@@ -49,6 +49,7 @@ public class Main extends JavaPlugin {
     public AnswerLoop tamiyaAnswerLoop = null;
     public Map<Player, Location> killedPlayer = new HashMap<>();
     public Player ulrichGirl = null;
+    public List<Player> kankrelats = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -75,7 +76,7 @@ public class Main extends JavaPlugin {
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
-        nonAttribuateRoles.add(GRoles.FranzHoppe);
+        nonAttribuateRoles.add(GRoles.FranzHopper);
         nonAttribuateRoles.add(GRoles.JeanPierreDelmas);
         nonAttribuateRoles.add(GRoles.JeremyBelpois);
         nonAttribuateRoles.add(GRoles.JimMoralés);

@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class GameLoop extends BukkitRunnable {
+    int index = 1;
     Main main;
     private int role = 0;
     private int roleSec = 10;
@@ -84,15 +85,19 @@ public class GameLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                //int index = rnd.nextInt(main.getNonAttribuateRoles().size());
-                int index = 12;
-                main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
-                main.getNonAttribuateRoles().remove(index);
+                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+                if(index < main.getNonAttribuateRoles().size()){
+                    main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
+                    main.getNonAttribuateRoles().remove(index);
+                }else{
+                    main.getRoles().put(player, GRoles.Agent);
+                }
                 ConfigPlayer(player);
                 player.sendMessage("§a====================");
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
                 player.sendMessage("§a====================");
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                index = 19;
             }
         }
     }
@@ -110,7 +115,7 @@ public class GameLoop extends BukkitRunnable {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 1, false, false));
                 player.getInventory().addItem(bow);
                 break;
-            case FranzHoppe:
+            case FranzHopper:
                 break;
             case JeanPierreDelmas:
                 break;
@@ -155,6 +160,9 @@ public class GameLoop extends BukkitRunnable {
                 ItemStack gaps = new ItemStack(Material.GOLDEN_APPLE, 5);
                 player.getInventory().addItem(gaps);
                 player.getInventory().addItem(new ItemStack(Material.COMPASS));
+                break;
+            case Agent:
+                player.sendMessage("§cEn tant qu'agent vous devez trouver Franz Hopper pour qu'il vous accorde un pouvoir !");
                 break;
         }
     }
