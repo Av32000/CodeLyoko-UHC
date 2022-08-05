@@ -7,6 +7,7 @@ import fr.av.codelyokouhc.enums.GState;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.Statistic;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -84,7 +85,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() - 0 + 1);
-                int index = 6;
+                int index = 4;
                 main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                 main.getNonAttribuateRoles().remove(index);
                 ConfigPlayer(player);
@@ -119,6 +120,8 @@ public class GameLoop extends BukkitRunnable {
             case JimMoralés:
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 0, false, false));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999999, 1,false, false));
+                player.setStatistic(Statistic.WALK_ONE_CM, 0);
+                player.setStatistic(Statistic.SPRINT_ONE_CM, 0);
                 break;
             case MillySolovieff:
                 break;
