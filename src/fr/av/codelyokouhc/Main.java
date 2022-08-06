@@ -50,6 +50,7 @@ public class Main extends JavaPlugin {
     public Map<Player, Location> killedPlayer = new HashMap<>();
     public Player ulrichGirl = null;
     public List<Player> kankrelats = new ArrayList<>();
+    public Map<Player,Float> blocks = new HashMap<>();
 
     @Override
     public void onEnable() {

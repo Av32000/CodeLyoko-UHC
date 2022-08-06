@@ -43,6 +43,14 @@ public class DammageListeners implements Listener {
             if(main.kankrelats.contains(e.getDamager())){
                 e.getEntity().setFireTicks(1000);
             }
+            if(main.blocks.containsKey(e.getDamager())){
+                e.setDamage(e.getDamage() * main.blocks.get(e.getDamager()));
+                if(((Player) e.getEntity()).getHealth() <= e.getFinalDamage()){
+                    float newMultiplicator = main.blocks.get(e.getDamager()) * 1.5f;
+                    main.blocks.remove(e.getDamager());
+                    main.blocks.put((Player) e.getDamager(), newMultiplicator);
+                }
+            }
         }
 
         if(e.getDamager() instanceof Arrow){

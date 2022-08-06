@@ -31,7 +31,7 @@ public class KankrelatsCommand implements CommandExecutor {
                     target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 999999999,0,false,false));
 
                     if(!main.kankrelats.contains(target)) main.kankrelats.add(target);
-
+                    if(main.blocks.containsKey(target)) main.blocks.remove(target);
                     target.sendMessage("§aFranz Hopper vous a transformé en Kankrelats");
                     target.playSound(target.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0f, 1.0f);
                 }
