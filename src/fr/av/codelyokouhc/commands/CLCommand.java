@@ -1,6 +1,7 @@
 package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.Main;
+import fr.av.codelyokouhc.loops.InfectLoop;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,10 @@ public class CLCommand implements CommandExecutor {
         else if(strings[0].equalsIgnoreCase("blocks")){
             BlocksCommand blocksCommand = new BlocksCommand(main);
             blocksCommand.onCommand(commandSender, command, s,strings);
+        }
+        else if(strings[0].equalsIgnoreCase("infect")){
+            InfectCommand infectCommand = new InfectCommand(main);
+            infectCommand.onCommand(commandSender, command, s,strings);
         }
         else{
             commandSender.sendMessage("§cCet argument n'existe pas (Voir /cl help)");

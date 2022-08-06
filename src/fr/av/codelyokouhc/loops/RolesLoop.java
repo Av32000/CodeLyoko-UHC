@@ -3,7 +3,9 @@ package fr.av.codelyokouhc.loops;
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GRoles;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,6 +16,8 @@ import java.util.Random;
 
 public class RolesLoop extends BukkitRunnable {
     Main main;
+    ItemStack enchantedWillBoots = null;
+    InfectLoop il = null;
     public RolesLoop(Main main){
         this.main = main;
     }
@@ -119,6 +123,25 @@ public class RolesLoop extends BukkitRunnable {
             main.ulrichGirl.sendMessage("§d💖Vous êtes en couple avec" + us.getDisplayName() +"💖");
             us.playSound(us.getLocation(), Sound.VILLAGER_YES, 1.0f, 1.0f);
             main.ulrichGirl.playSound(main.ulrichGirl.getLocation(), Sound.VILLAGER_YES, 1.0f, 1.0f);
+        }
+
+        //William Dunbar
+        if(main.getPlayerByRole(GRoles.WilliamDunba) != null && main.getPlayerByRole(GRoles.FranzHopper) != null){
+            Player will = main.getPlayerByRole(GRoles.WilliamDunba);
+            Player franz = main.getPlayerByRole(GRoles.FranzHopper);
+            if(main.playerIsAt(franz,will,5)){
+                if(il == null && main.franzInfected == null){
+                    InfectLoop infectLoop = new InfectLoop(main, franz);
+                    infectLoop.runTaskTimer(main, 1,20);
+                    il = infectLoop;
+                }
+            }else{
+                if(il != null){
+                    il.cancel();
+                    il = null;
+                }
+                main.franzCanInfect = false;
+            }
         }
     }
 

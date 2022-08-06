@@ -51,7 +51,8 @@ public class Main extends JavaPlugin {
     public Player ulrichGirl = null;
     public List<Player> kankrelats = new ArrayList<>();
     public Map<Player,Float> blocks = new HashMap<>();
-
+    public boolean franzCanInfect = false;
+    public Player franzInfected = null;
     @Override
     public void onEnable() {
         super.onEnable();

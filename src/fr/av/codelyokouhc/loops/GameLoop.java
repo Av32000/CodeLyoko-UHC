@@ -97,7 +97,7 @@ public class GameLoop extends BukkitRunnable {
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
                 player.sendMessage("§a====================");
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                index = 19;
+                index = 13;
             }
         }
     }
