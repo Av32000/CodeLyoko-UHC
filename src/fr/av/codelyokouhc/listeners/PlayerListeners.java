@@ -1,24 +1,26 @@
 package fr.av.codelyokouhc.listeners;
 
+import com.avaje.ebeaninternal.server.type.RsetDataReader;
 import fr.av.codelyokouhc.ScoreboardManagerUtils;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
+import fr.av.codelyokouhc.loops.DoubleJumpCooldownLoop;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.util.Vector;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class PlayerListeners implements Listener {
     private Main main;
@@ -144,6 +146,15 @@ public class PlayerListeners implements Listener {
             ItemStack newStack = new ItemStack(p.getItemInHand().getType(), p.getItemInHand().getAmount() -1);
             p.getInventory().remove(p.getItemInHand());
             p.getInventory().setItemInHand(newStack);
+        }
+        if(main.getRoles().get(p) == GRoles.AelitaSchaeffer && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bCooldown => 30s")){
+            if(main.aelitaCanJump){
+                main.aelitaCanJump = false;
+                Vector v = p.getLocation().getDirection().multiply(1).setY(1);
+                p.setVelocity(v);
+                DoubleJumpCooldownLoop djcl = new DoubleJumpCooldownLoop(main);
+                djcl.runTaskTimer(main,1,20);
+            }
         }
     }
 

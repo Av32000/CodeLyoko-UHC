@@ -53,6 +53,7 @@ public class Main extends JavaPlugin {
     public Map<Player,Float> blocks = new HashMap<>();
     public boolean franzCanInfect = false;
     public Player franzInfected = null;
+    public boolean aelitaCanJump = true;
     @Override
     public void onEnable() {
         super.onEnable();

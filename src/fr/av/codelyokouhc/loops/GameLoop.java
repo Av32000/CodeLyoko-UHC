@@ -11,13 +11,12 @@ import org.bukkit.Statistic;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class GameLoop extends BukkitRunnable {
     Main main;
@@ -83,8 +82,8 @@ public class GameLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
-
+                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+                int index = 0;
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -109,9 +108,19 @@ public class GameLoop extends BukkitRunnable {
                 bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
                 bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
                 bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+
+                ItemStack feather = new ItemStack(Material.FEATHER);
+                ItemMeta meta = feather.getItemMeta();
+                List<String> lore = new ArrayList<>();
+                lore.add("§bCooldown => 30s");
+                meta.setLore(lore);
+                meta.setDisplayName("§aDoubleJump");
+                feather.setItemMeta(meta);
+
                 player.setMaxHealth(14);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 1, false, false));
                 player.getInventory().addItem(bow);
+                player.getInventory().addItem(feather);
                 break;
             case FranzHopper:
                 break;
