@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class GameLoop extends BukkitRunnable {
-    int index = 1;
     Main main;
     private int role = 0;
     private int roleSec = 10;
@@ -81,11 +80,11 @@ public class GameLoop extends BukkitRunnable {
         start.runTaskTimer(main, 0, 1);
         RolesLoop rolesLoop = new RolesLoop(main);
         rolesLoop.runTaskTimer(main, 0,1);
-        Boolean is = true;
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+                int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -97,7 +96,6 @@ public class GameLoop extends BukkitRunnable {
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
                 player.sendMessage("§a====================");
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                index = 13;
             }
         }
     }
