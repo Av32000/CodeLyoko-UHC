@@ -161,6 +161,16 @@ public class GameLoop extends BukkitRunnable {
                 player.getInventory().addItem(gaps);
                 player.getInventory().addItem(new ItemStack(Material.COMPASS));
                 break;
+            case ChefMegaTank:
+                if(main.getPlayerByRole(GRoles.FranzHopper) != null){
+                    main.getPlayerByRole(GRoles.FranzHopper).sendMessage("§a" + player.getDisplayName() + " est le Chef MegaTank !");
+                }
+                break;
+            case Kalamar:
+                if(main.getPlayerByRole(GRoles.FranzHopper) != null){
+                    main.getPlayerByRole(GRoles.FranzHopper).sendMessage("§a" + player.getDisplayName() + " est Kalamar !");
+                }
+                break;
             case Agent:
                 player.sendMessage("§cEn tant qu'agent vous devez trouver Franz Hopper pour qu'il vous accorde un pouvoir !");
                 break;

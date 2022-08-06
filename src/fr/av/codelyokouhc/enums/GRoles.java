@@ -19,5 +19,7 @@ public enum GRoles {
     YumiIshiyama,
     MèreDeYumi,
     PèreDeYumi,
+    Kalamar,
+    ChefMegaTank,
     Agent;
 }

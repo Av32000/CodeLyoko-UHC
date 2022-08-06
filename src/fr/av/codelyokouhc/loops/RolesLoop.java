@@ -18,11 +18,13 @@ public class RolesLoop extends BukkitRunnable {
     Main main;
     ItemStack enchantedWillBoots = null;
     InfectLoop il = null;
+
+    boolean franzGetPseudo = false;
     public RolesLoop(Main main){
         this.main = main;
     }
     @Override
-    public void run() {
+    public void run(){
         //Odd & Kiwi
         if(main.getPlayerByRole(GRoles.Odd) != null && main.getPlayerByRole(GRoles.Kiwi) != null){
             Player odd = main.getPlayerByRole(GRoles.Odd);
