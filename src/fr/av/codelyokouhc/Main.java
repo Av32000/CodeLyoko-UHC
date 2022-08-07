@@ -61,6 +61,8 @@ public class Main extends JavaPlugin {
     public Player franzInfected = null;
     public boolean aelitaCanJump = true;
     public boolean computerWork = false;
+
+    public boolean millyCanShow = true;
     @Override
     public void onEnable() {
         super.onEnable();

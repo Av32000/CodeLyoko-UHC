@@ -6,16 +6,20 @@ import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.loops.DoubleJumpCooldownLoop;
+import fr.av.codelyokouhc.loops.OpenInventoryCooldownLoop;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -171,6 +175,92 @@ public class PlayerListeners implements Listener {
                 }
             }
         }
+        if(main.getRoles().get(p) == GRoles.MillySolovieff && p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bVoir la moitié de l'inventaire d'un joueur.")){
+            //Find Inventory Size
+            List<Player> players = new ArrayList<>();
+            int invSize = 0;
+            for (Player ps: main.getServer().getOnlinePlayers()) {
+                if (ps.getGameMode() == GameMode.SURVIVAL) players.add(ps);
+            }
+
+            if(players.size() <= 9){
+                invSize = 9;
+            }else if(players.size() <= 18){
+                invSize = 18;
+            }else if(players.size() <= 27){
+                invSize = 27;
+            }else if(players.size() <= 36){
+                invSize = 36;
+            }else if(players.size() <= 45){
+                invSize = 45;
+            }else if(players.size() <= 54){
+                invSize = 54;
+            }else{
+                invSize = 90;
+            }
+
+            //Create Inventory
+            Inventory playerListInventory = Bukkit.createInventory(null, invSize, "Liste des Joueurs");
+
+            //Add Player Head To Inventory
+            for (Player ps : players) {
+                playerListInventory.addItem(getPlayerHead(ps));
+            }
+
+            p.openInventory(playerListInventory);
+        }
+    }
+
+    @EventHandler
+    public void onClick(InventoryClickEvent e){
+        Inventory inv = e.getInventory();
+        Player p = (Player) e.getWhoClicked();
+        ItemStack current = e.getCurrentItem();
+
+        if(current == null) return;
+
+        if(inv.getName().equalsIgnoreCase("Liste des Joueurs")){
+            e.setCancelled(true);
+            if(current.getItemMeta() != null && current.getItemMeta().getDisplayName() != null && current.getItemMeta().getDisplayName().startsWith("§aInventaire de ")){
+                p.closeInventory();
+                if(main.millyCanShow) {
+                    OpenHalfInventory(current.getItemMeta().getDisplayName().split("Inventaire de ")[1], p);
+                    main.millyCanShow = false;
+                    OpenInventoryCooldownLoop oicl = new OpenInventoryCooldownLoop(main);
+                    oicl.runTaskTimer(main,1,20);
+                }
+                else p.sendMessage("§cVous devez attendre 13 min entre chaque utilisation de cet item !");
+            }
+        }
+
+        if(inv.getName().startsWith("Inventaire de")){
+            e.setCancelled(true);
+        }
+    }
+
+    public void OpenHalfInventory(String playerName, Player p){
+        Player player = main.getServer().getPlayer(playerName);
+
+        Inventory inv = Bukkit.createInventory(null, 18, "Inventaire de " + playerName);
+
+        for (int i = 0; i < 18; i++){
+            if(player.getInventory().getItem(i) != null){
+                inv.setItem(i, player.getInventory().getItem(i));
+            }else{
+                inv.setItem(i, new ItemStack(Material.AIR));
+            }
+        }
+
+        p.openInventory(inv);
+    }
+
+    ItemStack getPlayerHead(Player player){
+        ItemStack skull = new ItemStack(397, 1, (short) 3);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        meta.setOwner(player.getName());
+        meta.setDisplayName("§aInventaire de " + player.getDisplayName());
+        skull.setItemMeta(meta);
+        return skull;
     }
 
     public void populate(World world, Random random, Chunk source) {

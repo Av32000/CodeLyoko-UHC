@@ -84,7 +84,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
-                int index = 2;
+                int index = 5;
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -149,6 +149,15 @@ public class GameLoop extends BukkitRunnable {
                 player.setStatistic(Statistic.SPRINT_ONE_CM, 0);
                 break;
             case MillySolovieff:
+                ItemStack echo = main.getSkullWithUrl("http://textures.minecraft.net/texture/b462ddfa553ce78683be477b8d8654f3dfc3aa2969808478c987ab88c376a0");
+                ItemMeta echoMeta = echo.getItemMeta();
+                echoMeta.setDisplayName("§dEchos de Kadic");
+                List<String> echoLore = new ArrayList<>();
+                echoLore.add("§bVoir la moitié de l'inventaire d'un joueur.");
+                echoLore.add("§cNE PAS POSER !");
+                echoMeta.setLore(echoLore);
+                echo.setItemMeta(echoMeta);
+                player.getInventory().addItem(echo);
                 break;
             case TamiyaDiop:
                 break;
