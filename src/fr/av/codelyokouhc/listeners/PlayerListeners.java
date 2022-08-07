@@ -9,15 +9,19 @@ import fr.av.codelyokouhc.loops.DoubleJumpCooldownLoop;
 import fr.av.codelyokouhc.loops.OpenInventoryCooldownLoop;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
@@ -235,6 +239,18 @@ public class PlayerListeners implements Listener {
 
         if(inv.getName().startsWith("Inventaire de")){
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onCraft(PrepareItemCraftEvent e){
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_SWORD && e.getInventory().getRecipe().getResult().getEnchantments().size() == 0){
+            e.getInventory().setResult(new ItemStack(Material.AIR));
+            for(HumanEntity he:e.getViewers()) {
+                if(he instanceof Player) {
+                    ((Player)he).sendMessage("§cDésolé mais ce craft est déactivé :(");
+                }
+            }
         }
     }
 

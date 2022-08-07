@@ -19,10 +19,13 @@ import fr.av.codelyokouhc.listeners.PlayerListeners;
 import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -105,6 +108,18 @@ public class Main extends JavaPlugin {
         nonAttribuateRoles.add(GRoles.YumiIshiyama);
         nonAttribuateRoles.add(GRoles.MèreDeYumi);
         nonAttribuateRoles.add(GRoles.PèreDeYumi);
+
+        ItemStack pinkSword = new ItemStack(Material.GOLD_SWORD);
+        pinkSword.addEnchantment(Enchantment.DAMAGE_ALL,1);
+        pinkSword.addEnchantment(Enchantment.KNOCKBACK,1);
+        ItemMeta pinkSwordMeta = pinkSword.getItemMeta();
+        pinkSwordMeta.setDisplayName("Lame Rose");
+        pinkSword.setItemMeta(pinkSwordMeta);
+        ShapedRecipe pinkSwordRecipe =  new ShapedRecipe(pinkSword);
+        pinkSwordRecipe.shape("OOO","ODO","OOO");
+        pinkSwordRecipe.setIngredient('O', Material.OBSIDIAN);
+        pinkSwordRecipe.setIngredient('D', Material.DIAMOND);
+        getServer().addRecipe(pinkSwordRecipe);
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListeners(this), this);
