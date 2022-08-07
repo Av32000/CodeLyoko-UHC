@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
     private Location lyokoSpawn;
     private Map<Player, GRoles> roles = new HashMap<>();
     private List<GRoles> nonAttribuateRoles = new ArrayList<>();
-    private List<Player> inLyokoPlayer = new ArrayList<>();
+    private Map<Player, Location> inLyokoPlayer = new HashMap<>();
     private int episode = 0;
 
     //Reset when episode change
@@ -237,16 +237,21 @@ public class Main extends JavaPlugin {
     }
 
     public void addPlayerLyoko(Player player){
-        if(!inLyokoPlayer.contains(player)) inLyokoPlayer.add(player);
+        if(!inLyokoPlayer.containsKey(player)) inLyokoPlayer.put(player, player.getLocation());
     }
 
     public void removePlayerLyoko(Player player){
-        if(inLyokoPlayer.contains(player)) inLyokoPlayer.remove(player);
+        if(inLyokoPlayer.containsKey(player)) inLyokoPlayer.remove(player);
     }
 
     public boolean isInLyoko(Player player){
-        if(inLyokoPlayer.contains(player)) return true;
+        if(inLyokoPlayer.containsKey(player)) return true;
         return false;
+    }
+
+    public Location getOverworldSpawnPlayer(Player player){
+        if(inLyokoPlayer.containsKey(player)) return inLyokoPlayer.get(player).add(2,2,2);
+        else return null;
     }
 
     public WorldEditPlugin getWorldEdit(){

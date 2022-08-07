@@ -9,9 +9,7 @@ public class InfectLoop extends BukkitRunnable {
     Main main;
     Player franz;
 
-    //int timer = 240;
-    int timer = 30;
-
+    int timer = 240;
     public InfectLoop(Main main, Player franz) {
         this.main = main;
         this.franz = franz;

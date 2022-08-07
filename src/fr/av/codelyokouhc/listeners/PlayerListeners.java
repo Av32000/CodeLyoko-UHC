@@ -112,9 +112,9 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onTpDim(PlayerPortalEvent e){
         if(e.getTo().getWorld() == main.getServer().getWorld("world_the_end")){
+            main.addPlayerLyoko(e.getPlayer());
             e.getPlayer().teleport(main.getLyokoSpawn());
             e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
-            main.addPlayerLyoko(e.getPlayer());
             e.setCancelled(true);
         }
     }
@@ -163,9 +163,9 @@ public class PlayerListeners implements Listener {
         if(main.getRoles().get(p) == GRoles.JeanPierreDelmas && p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bAccès au lyoko après 60min de jeu !")){
             if(p.getWorld() == main.getServer().getWorld("world")){
                 if(main.computerWork){
+                    main.addPlayerLyoko(e.getPlayer());
                     e.getPlayer().teleport(main.getLyokoSpawn());
                     e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
-                    main.addPlayerLyoko(e.getPlayer());
                 }else{
                     p.sendMessage("§cVous devez attendre 1h de jeu pour pouvoir utiliser cette item !");
                 }

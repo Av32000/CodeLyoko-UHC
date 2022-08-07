@@ -70,7 +70,7 @@ public class GameLoop extends BukkitRunnable {
             roleSec--;
         }
 
-        if(timer == 60){
+        if(timer == 1){
             main.computerWork = true;
         }
     }

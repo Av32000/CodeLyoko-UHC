@@ -17,7 +17,7 @@ public class OverworldCommand implements CommandExecutor {
         if(commandSender instanceof Player){
             Player player = ((Player) commandSender).getPlayer();
             if(main.isInLyoko(player)){
-                player.teleport(main.getGameSpawn());
+                player.teleport(main.getOverworldSpawnPlayer(player));
                 player.sendMessage("§eBienvenue dans l'overworld !");
                 main.removePlayerLyoko(player);
                 return true;
