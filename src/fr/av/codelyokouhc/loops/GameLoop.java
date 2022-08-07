@@ -4,10 +4,7 @@ import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.ScoreboardManagerUtils;
 import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.Statistic;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -72,6 +69,10 @@ public class GameLoop extends BukkitRunnable {
         if(!endRole){
             roleSec--;
         }
+
+        if(timer == 60){
+            main.computerWork = true;
+        }
     }
 
     private void SelectRole(){
@@ -83,7 +84,7 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
-                int index = 0;
+                int index = 2;
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -117,14 +118,26 @@ public class GameLoop extends BukkitRunnable {
                 meta.setDisplayName("§aDoubleJump");
                 feather.setItemMeta(meta);
 
+                ItemStack arrow = new ItemStack(Material.ARROW);
+
                 player.setMaxHealth(14);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 1, false, false));
                 player.getInventory().addItem(bow);
                 player.getInventory().addItem(feather);
+                player.getInventory().addItem(arrow);
                 break;
             case FranzHopper:
                 break;
             case JeanPierreDelmas:
+                ItemStack computer = main.getSkullWithUrl("http://textures.minecraft.net/texture/8d19c68461666aacd7628e34a1e2ad39fe4f2bde32e231963ef3b35533");
+                ItemMeta computerMeta = computer.getItemMeta();
+                computerMeta.setDisplayName("§dS§au§bp§fe§cr§ac§4a§fl§bc§du§al§ca§bt§de§fu§ar");
+                List<String> computerLore = new ArrayList<>();
+                computerLore.add("§bAccès au lyoko après 60min de jeu !");
+                computerLore.add("§cNE PAS POSER !");
+                computerMeta.setLore(computerLore);
+                computer.setItemMeta(computerMeta);
+                player.getInventory().addItem(computer);
                 break;
             case JeremyBelpois:
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 99999999, 0, false, false));

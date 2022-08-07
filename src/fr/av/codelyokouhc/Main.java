@@ -1,5 +1,7 @@
 package fr.av.codelyokouhc;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
@@ -18,6 +20,9 @@ import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +31,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -54,6 +60,7 @@ public class Main extends JavaPlugin {
     public boolean franzCanInfect = false;
     public Player franzInfected = null;
     public boolean aelitaCanJump = true;
+    public boolean computerWork = false;
     @Override
     public void onEnable() {
         super.onEnable();
@@ -259,5 +266,31 @@ public class Main extends JavaPlugin {
         }catch (MaxChangedBlocksException | DataException | IOException e){
             e.printStackTrace();
         }
+    }
+
+    public ItemStack getSkullWithUrl(String url) {
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+
+        if (url == null || url.isEmpty()) return skull;
+
+        ItemMeta skullMeta = skull.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
+        profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
+
+        Field profileField = null;
+        try {
+            profileField = skullMeta.getClass().getDeclaredField("profile");
+        } catch (NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+        }
+        profileField.setAccessible(true);
+        try {
+            profileField.set(skullMeta, profile);
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        skull.setItemMeta(skullMeta);
+        return skull;
     }
 }

@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
 import org.bukkit.inventory.ItemStack;
@@ -140,6 +141,9 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onUseItem(PlayerInteractEvent e){
+        if(e.getAction() != Action.RIGHT_CLICK_AIR){
+            return;
+        }
         Player p = e.getPlayer();
         if(p.getHealth() < 10 && p.getItemInHand() != null && p.getItemInHand().getType() == Material.COOKED_BEEF && main.getRoles().size() > 0 && main.getRoles().get(p) == GRoles.Odd){
             p.setHealth(p.getHealth() + 1);
@@ -147,13 +151,24 @@ public class PlayerListeners implements Listener {
             p.getInventory().remove(p.getItemInHand());
             p.getInventory().setItemInHand(newStack);
         }
-        if(main.getRoles().get(p) == GRoles.AelitaSchaeffer && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bCooldown => 30s")){
+        if(main.getRoles().get(p) == GRoles.AelitaSchaeffer && p.getItemInHand().getType() == Material.FEATHER && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bCooldown => 30s")){
             if(main.aelitaCanJump){
                 main.aelitaCanJump = false;
                 Vector v = p.getLocation().getDirection().multiply(1).setY(1);
                 p.setVelocity(v);
                 DoubleJumpCooldownLoop djcl = new DoubleJumpCooldownLoop(main);
                 djcl.runTaskTimer(main,1,20);
+            }
+        }
+        if(main.getRoles().get(p) == GRoles.JeanPierreDelmas && p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bAccès au lyoko après 60min de jeu !")){
+            if(p.getWorld() == main.getServer().getWorld("world")){
+                if(main.computerWork){
+                    e.getPlayer().teleport(main.getLyokoSpawn());
+                    e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
+                    main.addPlayerLyoko(e.getPlayer());
+                }else{
+                    p.sendMessage("§cVous devez attendre 1h de jeu pour pouvoir utiliser cette item !");
+                }
             }
         }
     }
