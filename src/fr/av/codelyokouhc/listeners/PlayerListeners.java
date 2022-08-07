@@ -167,7 +167,7 @@ public class PlayerListeners implements Listener {
                     e.getPlayer().teleport(main.getLyokoSpawn());
                     e.getPlayer().sendMessage("§eBienvenue dans le Lyoko !");
                 }else{
-                    p.sendMessage("§cVous devez attendre 1h de jeu pour pouvoir utiliser cette item !");
+                    p.sendMessage("§cVous devez attendre 1h de jeu pour pouvoir utiliser cet item !");
                 }
             }
         }

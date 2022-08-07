@@ -18,6 +18,10 @@ public class StartGameCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if(((Player) commandSender).getWorld() != main.getServer().getWorld("world")){
+            commandSender.sendMessage("§cVous devez être dans l'overworld pour lancer le jeu !");
+            return false;
+        }
         if(main.isState(GState.WAITINGPLAYERS)){
             main.setState(GState.STARTING);
             Bukkit.broadcastMessage("§aLancement du jeu...");
