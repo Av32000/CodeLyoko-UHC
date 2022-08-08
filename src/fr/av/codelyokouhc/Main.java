@@ -20,6 +20,7 @@ import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -110,11 +111,13 @@ public class Main extends JavaPlugin {
         nonAttribuateRoles.add(GRoles.PèreDeYumi);
 
         ItemStack pinkSword = new ItemStack(Material.GOLD_SWORD);
+        pinkSword.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
         pinkSword.addEnchantment(Enchantment.DAMAGE_ALL,1);
         pinkSword.addEnchantment(Enchantment.KNOCKBACK,1);
         ItemMeta pinkSwordMeta = pinkSword.getItemMeta();
         pinkSwordMeta.setDisplayName("Lame Rose");
         pinkSword.setItemMeta(pinkSwordMeta);
+
         ShapedRecipe pinkSwordRecipe =  new ShapedRecipe(pinkSword);
         pinkSwordRecipe.shape("OOO","ODO","OOO");
         pinkSwordRecipe.setIngredient('O', Material.OBSIDIAN);
@@ -314,5 +317,64 @@ public class Main extends JavaPlugin {
         }
         skull.setItemMeta(skullMeta);
         return skull;
+    }
+
+    public void sendMessageInfo(Player player, GRoles role){
+        String msg = "";
+        switch (role){
+            case AelitaSchaeffer:
+                msg = "§bVous êtes un Lyoko Guerrier. Vous avez un double jump toutes les 30s";
+                break;
+            case FranzHopper:
+                msg = "§bVous êtes le chef du XANA. Vous devez retrouver vos agents et gagner avec eux. Pour les aider vous avez accès au commandes /cl blocks, /cl MegaTanks, /cl kankrelats, /cl spectre (/cl help pour plus d'info)";
+                break;
+            case JeanPierreDelmas:
+                msg = "§bVous êtes un Lyoko Guerrier. Lorsque vous êtes entouré de plus de 3 de vos alliés, vous obtenez speed 1.";
+                break;
+            case JeremyBelpois:
+                msg = "§bVous êtes un Lyoko Guerrier. Grace à la commande /cl revive vous pouvez revive toutes les personnes mortes durant les 60 dernières secondes et cela deux fois dans la game. De plus, vous avez l'item supercalculateur qui vous permet de vous rendre dans le lyoko n'importe quand à partir de 60 minutes de jeux.";
+                break;
+            case JimMoralés:
+                msg = "§bVous êtes un Lyoko Guerrier. Tous les 3000 blocs parcourus vous gagner du speed suplémentaire.";
+                break;
+            case MillySolovieff:
+                msg = "§bVous êtes un Lyoko Guerrier. Vous êtes un rôle à info. Grace à votre item échos de kadic vous pouvez voir la moitié de l'inventaire d'un joueur toutes les 13 minutes.";
+                break;
+            case TamiyaDiop:
+                msg = "§bVous êtes un Lyoko Guerrier. Grace à la commande /cl ask vous pouvez poser une question à n'importe quel joueur de la partie qui devra vous répondre par oui ou par non.";
+                break;
+            case Odd:
+                msg = "§bVous êtes en duo avec kiwi. A coté de lui vous obtenez forece 1 de jour et résistance 1 la nuit. Si kiwi vient à mourir avant vous et qu'il est dans un périmètre de 30 blocs vous obtiendrez une résistance 2 ";
+                break;
+            case Kiwi:
+                msg = "§bVous êtes en duo avec Odd. Si odd meurs avant vous, vous vous retrouvez à 8 coeurs et weakness";
+                break;
+            case Hervé:
+            case Nicolas:
+            case SuzanneHertz:
+            case UlrichStern:
+                msg = "§bVous êtes un Lyoko Guerrier.";
+                break;
+            case Sisi:
+                msg = "§bVous êtes un Lyoko Guerrier. Vous pouvez crafter la Lame Rose qui est une arme avec 1 bloc de plus de portée enchanté sharpness 1 et knockback 1";
+                break;
+            case WilliamDunba:
+                msg = "§bVous êtes un Lyoko Guerrier. Vous pouvez vous faire infecter par Franz si il reste plus de 4 minutes à coté de vous. Vous rejoindrez alors son clan avec Résistance 1 Speed 1 Force 1 et Agilité Aquatique";
+                break;
+            case YumiIshiyama:
+                msg = "§bVous êtes en équipe avec vos parents. Vous devez gagner avec eux. Vous perdrez 3 coeurs permanent a chaque fois que l'un des deux sucombra.";
+                break;
+            case MèreDeYumi:
+            case PèreDeYumi:
+                msg = "§bVous êtes en équipe avec Yumi. Vous devez la protéger au péril de votre vie. Votre bousole pointe vers elle à tous moments !";
+                break;
+            case Kalamar:
+                msg = "§bVous êtes en équipe avec Franz. Vous devez l'aider à trouver ses agents. Il connais votre pseudo.";
+                break;
+            case Agent:
+                msg = "§bVous êtes en équipe avec Franz. Vous devez le retrouver pour qu'il vous accorde des pouvoirs.";
+                break;
+        }
+        player.sendMessage(msg);
     }
 }

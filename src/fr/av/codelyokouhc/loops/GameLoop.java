@@ -83,8 +83,7 @@ public class GameLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
-                int index = 5;
+                int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -102,6 +101,7 @@ public class GameLoop extends BukkitRunnable {
 
     void ConfigPlayer(Player player){
         GRoles role = main.getRoles().get(player);
+        main.sendMessageInfo(player, role);
         switch (role){
             case AelitaSchaeffer:
                 ItemStack bow = new ItemStack(Material.BOW, 1);
