@@ -83,17 +83,18 @@ public class GameLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
-                int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+                //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
+                int index = 1;
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
                 }else{
                     main.getRoles().put(player, GRoles.Agent);
                 }
-                ConfigPlayer(player);
                 player.sendMessage("§a====================");
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
                 player.sendMessage("§a====================");
+                ConfigPlayer(player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             }
         }
@@ -127,6 +128,7 @@ public class GameLoop extends BukkitRunnable {
                 player.getInventory().addItem(arrow);
                 break;
             case ChefDuXana:
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999999, 0, false, false));
                 break;
             case JeanPierreDelmas:
                 ItemStack computer = main.getSkullWithUrl("http://textures.minecraft.net/texture/8d19c68461666aacd7628e34a1e2ad39fe4f2bde32e231963ef3b35533");
