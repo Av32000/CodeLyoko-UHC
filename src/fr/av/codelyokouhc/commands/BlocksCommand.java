@@ -32,6 +32,8 @@ public class BlocksCommand implements CommandExecutor {
                     target.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 999999999,0,false,false));
 
                     if(!main.blocks.containsKey(target)) main.blocks.put(target,1f);
+                    if(main.spectres.contains(target)) main.spectres.remove(target);
+                    if(main.kankrelats.contains(target)) main.kankrelats.remove(target);
 
                     target.sendMessage("§aFranz Hopper vous a transformé en Blocks");
                     target.playSound(target.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0f, 1.0f);

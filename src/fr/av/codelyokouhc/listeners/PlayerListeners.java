@@ -6,6 +6,7 @@ import fr.av.codelyokouhc.enums.GRoles;
 import fr.av.codelyokouhc.enums.GState;
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.loops.DoubleJumpCooldownLoop;
+import fr.av.codelyokouhc.loops.FlyLoops;
 import fr.av.codelyokouhc.loops.OpenInventoryCooldownLoop;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -179,6 +180,14 @@ public class PlayerListeners implements Listener {
                 }
             }
         }
+
+        if(main.spectres.contains(p) && p.getItemInHand().getType() == Material.FEATHER && p.getItemInHand().getItemMeta() != null && p.getItemInHand().getItemMeta().getLore() != null && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bVous permet de Fly pendant 5s")){
+            p.setAllowFlight(true);
+            FlyLoops fl = new FlyLoops(main,p);
+            fl.runTaskTimer(main,1,20);
+            p.getInventory().remove(p.getItemInHand());
+        }
+
         if(main.getRoles().get(p) == GRoles.MillySolovieff && p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getLore().size() >= 1 && p.getItemInHand().getItemMeta().getLore().get(0).equalsIgnoreCase("§bVoir la moitié de l'inventaire d'un joueur.")){
             //Find Inventory Size
             List<Player> players = new ArrayList<>();

@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 
 public class GameLoop extends BukkitRunnable {
+    int index = 1;
     Main main;
     private int role = 0;
     private int roleSec = 10;
@@ -84,7 +85,6 @@ public class GameLoop extends BukkitRunnable {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();
                 //int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 4);
-                int index = 1;
                 if(index < main.getNonAttribuateRoles().size()){
                     main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
                     main.getNonAttribuateRoles().remove(index);
@@ -97,6 +97,7 @@ public class GameLoop extends BukkitRunnable {
                 ConfigPlayer(player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             }
+            index = 52;
         }
     }
 

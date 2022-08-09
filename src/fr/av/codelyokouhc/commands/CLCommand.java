@@ -50,6 +50,10 @@ public class CLCommand implements CommandExecutor {
             ScanCommand scanCommand = new ScanCommand(main);
             scanCommand.onCommand(commandSender, command, s,strings);
         }
+        else if(strings[0].equalsIgnoreCase("spectre")){
+            SpectreCommand spectreCommand = new SpectreCommand(main);
+            spectreCommand.onCommand(commandSender, command, s,strings);
+        }
         else{
             commandSender.sendMessage("§cCet argument n'existe pas (Voir /cl help)");
         }

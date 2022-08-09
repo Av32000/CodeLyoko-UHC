@@ -34,6 +34,7 @@ public class MegaTankCommand implements CommandExecutor {
 
                     if(main.kankrelats.contains(target)) main.kankrelats.remove(target);
                     if(main.blocks.containsKey(target)) main.blocks.remove(target);
+                    if(main.spectres.contains(target)) main.spectres.remove(target);
 
                     target.sendMessage("§aFranz Hopper vous a transformé en Mega Tank");
                     target.playSound(target.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0f, 1.0f);
