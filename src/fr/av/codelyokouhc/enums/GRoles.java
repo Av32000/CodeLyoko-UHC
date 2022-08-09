@@ -2,7 +2,7 @@ package fr.av.codelyokouhc.enums;
 
 public enum GRoles {
     AelitaSchaeffer,
-    FranzHopper,
+    ChefDuXana,
     JeanPierreDelmas,
     JeremyBelpois,
     JimMoralés,

@@ -20,13 +20,10 @@ import fr.av.codelyokouhc.loops.AnswerLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -92,7 +89,7 @@ public class Main extends JavaPlugin {
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
-        nonAttribuateRoles.add(GRoles.FranzHopper);
+        nonAttribuateRoles.add(GRoles.ChefDuXana);
         nonAttribuateRoles.add(GRoles.JeanPierreDelmas);
         nonAttribuateRoles.add(GRoles.JeremyBelpois);
         nonAttribuateRoles.add(GRoles.JimMoralés);
@@ -325,7 +322,7 @@ public class Main extends JavaPlugin {
             case AelitaSchaeffer:
                 msg = "§bVous êtes un Lyoko Guerrier. Vous avez un double jump toutes les 30s";
                 break;
-            case FranzHopper:
+            case ChefDuXana:
                 msg = "§bVous êtes le chef du XANA. Vous devez retrouver vos agents et gagner avec eux. Pour les aider vous avez accès au commandes /cl blocks, /cl MegaTanks, /cl kankrelats, /cl spectre (/cl help pour plus d'info)";
                 break;
             case JeanPierreDelmas:
@@ -369,10 +366,10 @@ public class Main extends JavaPlugin {
                 msg = "§bVous êtes en équipe avec Yumi. Vous devez la protéger au péril de votre vie. Votre bousole pointe vers elle à tous moments !";
                 break;
             case Kalamar:
-                msg = "§bVous êtes en équipe avec Franz. Vous devez l'aider à trouver ses agents. Il connais votre pseudo.";
+                msg = "§bVous êtes en équipe avec le chef du XANA. Vous devez l'aider à trouver ses agents. Il connais votre pseudo.";
                 break;
             case Agent:
-                msg = "§bVous êtes en équipe avec Franz. Vous devez le retrouver pour qu'il vous accorde des pouvoirs.";
+                msg = "§bVous êtes en équipe avec le chef du XANA. Vous devez le retrouver pour qu'il vous accorde des pouvoirs.";
                 break;
         }
         player.sendMessage(msg);

@@ -24,7 +24,7 @@ public class InfectCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
-        if(main.getRoles().get(player) == GRoles.FranzHopper && player.getGameMode() == GameMode.SURVIVAL){
+        if(main.getRoles().get(player) == GRoles.ChefDuXana && player.getGameMode() == GameMode.SURVIVAL){
             if(main.franzInfected != null){
                 player.sendMessage("§cVous avez déja infecté William Dunbar !");
                 return true;

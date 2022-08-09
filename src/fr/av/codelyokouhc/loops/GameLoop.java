@@ -126,7 +126,7 @@ public class GameLoop extends BukkitRunnable {
                 player.getInventory().addItem(feather);
                 player.getInventory().addItem(arrow);
                 break;
-            case FranzHopper:
+            case ChefDuXana:
                 break;
             case JeanPierreDelmas:
                 ItemStack computer = main.getSkullWithUrl("http://textures.minecraft.net/texture/8d19c68461666aacd7628e34a1e2ad39fe4f2bde32e231963ef3b35533");
@@ -191,17 +191,14 @@ public class GameLoop extends BukkitRunnable {
                 player.getInventory().addItem(new ItemStack(Material.COMPASS));
                 break;
             case ChefMegaTank:
-                if(main.getPlayerByRole(GRoles.FranzHopper) != null){
-                    main.getPlayerByRole(GRoles.FranzHopper).sendMessage("§a" + player.getDisplayName() + " est le Chef MegaTank !");
+                if(main.getPlayerByRole(GRoles.ChefDuXana) != null){
+                    main.getPlayerByRole(GRoles.ChefDuXana).sendMessage("§a" + player.getDisplayName() + " est le Chef MegaTank !");
                 }
                 break;
             case Kalamar:
-                if(main.getPlayerByRole(GRoles.FranzHopper) != null){
-                    main.getPlayerByRole(GRoles.FranzHopper).sendMessage("§a" + player.getDisplayName() + " est Kalamar !");
+                if(main.getPlayerByRole(GRoles.ChefDuXana) != null){
+                    main.getPlayerByRole(GRoles.ChefDuXana).sendMessage("§a" + player.getDisplayName() + " est Kalamar !");
                 }
-                break;
-            case Agent:
-                player.sendMessage("§cEn tant qu'agent vous devez trouver Franz Hopper pour qu'il vous accorde un pouvoir !");
                 break;
         }
     }

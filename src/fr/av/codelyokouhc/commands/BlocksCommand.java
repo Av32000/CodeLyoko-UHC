@@ -20,7 +20,7 @@ public class BlocksCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
-        if(main.getRoles().get(player) == GRoles.FranzHopper && player.getGameMode() == GameMode.SURVIVAL){
+        if(main.getRoles().get(player) == GRoles.ChefDuXana && player.getGameMode() == GameMode.SURVIVAL){
             if(strings.length != 2 || main.getServer().getPlayer(strings[1]) == null){
                 player.sendMessage("§cUtilisation : /cl blocks <Player>");
             }else{

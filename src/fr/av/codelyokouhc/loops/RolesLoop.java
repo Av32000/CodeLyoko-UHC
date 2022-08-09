@@ -3,7 +3,6 @@ package fr.av.codelyokouhc.loops;
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GRoles;
 import org.bukkit.*;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -128,9 +127,9 @@ public class RolesLoop extends BukkitRunnable {
         }
 
         //William Dunbar
-        if(main.getPlayerByRole(GRoles.WilliamDunba) != null && main.getPlayerByRole(GRoles.FranzHopper) != null){
+        if(main.getPlayerByRole(GRoles.WilliamDunba) != null && main.getPlayerByRole(GRoles.ChefDuXana) != null){
             Player will = main.getPlayerByRole(GRoles.WilliamDunba);
-            Player franz = main.getPlayerByRole(GRoles.FranzHopper);
+            Player franz = main.getPlayerByRole(GRoles.ChefDuXana);
             if(main.playerIsAt(franz,will,5)){
                 if(il == null && main.franzInfected == null){
                     InfectLoop infectLoop = new InfectLoop(main, franz);
