@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 
 public class GameLoop extends BukkitRunnable {
-    int index = 1;
+    int index = 11;
     Main main;
     private int role = 0;
     private int roleSec = 10;

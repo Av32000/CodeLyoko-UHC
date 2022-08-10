@@ -21,6 +21,7 @@ import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -111,9 +112,10 @@ public class Main extends JavaPlugin {
 
         ItemStack pinkSword = new ItemStack(Material.GOLD_SWORD);
         pinkSword.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
-        pinkSword.addEnchantment(Enchantment.DAMAGE_ALL,1);
+        pinkSword.addEnchantment(Enchantment.DAMAGE_ALL,4);
         pinkSword.addEnchantment(Enchantment.KNOCKBACK,1);
         ItemMeta pinkSwordMeta = pinkSword.getItemMeta();
+        pinkSwordMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         pinkSwordMeta.setDisplayName("Lame Rose");
         pinkSword.setItemMeta(pinkSwordMeta);
 
