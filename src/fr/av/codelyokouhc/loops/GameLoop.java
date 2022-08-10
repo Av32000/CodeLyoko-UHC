@@ -97,7 +97,7 @@ public class GameLoop extends BukkitRunnable {
                 ConfigPlayer(player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             }
-            index = 52;
+            index = 14;
         }
     }
 

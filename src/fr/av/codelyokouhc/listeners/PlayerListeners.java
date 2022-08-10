@@ -271,7 +271,71 @@ public class PlayerListeners implements Listener {
                 }
             }
         }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_HELMET && e.getInventory().getRecipe().getResult().getEnchantments().size() > 0){
+            if(main.getRoles().get(e.getViewers().get(0)) != GRoles.YumiIshiyama){
+                e.getInventory().setResult(new ItemStack(Material.AIR));
+                for(HumanEntity he:e.getViewers()) {
+                    if(he instanceof Player) {
+                        ((Player)he).sendMessage("§cDésolé mais vous ne pouvez pas crafter cet item :(");
+                    }
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_CHESTPLATE && e.getInventory().getRecipe().getResult().getEnchantments().size() > 0){
+            if(main.getRoles().get(e.getViewers().get(0)) != GRoles.YumiIshiyama){
+                e.getInventory().setResult(new ItemStack(Material.AIR));
+                for(HumanEntity he:e.getViewers()) {
+                    if(he instanceof Player) {
+                        ((Player)he).sendMessage("§cDésolé mais vous ne pouvez pas crafter cet item :(");
+                    }
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_LEGGINGS && e.getInventory().getRecipe().getResult().getEnchantments().size() > 0){
+            if(main.getRoles().get(e.getViewers().get(0)) != GRoles.YumiIshiyama){
+                e.getInventory().setResult(new ItemStack(Material.AIR));
+                for(HumanEntity he:e.getViewers()) {
+                    if(he instanceof Player) {
+                        ((Player)he).sendMessage("§cDésolé mais vous ne pouvez pas crafter cet item :(");
+                    }
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_BOOTS && e.getInventory().getRecipe().getResult().getEnchantments().size() > 0){
+            if(main.getRoles().get(e.getViewers().get(0)) != GRoles.YumiIshiyama){
+                e.getInventory().setResult(new ItemStack(Material.AIR));
+                for(HumanEntity he:e.getViewers()) {
+                    if(he instanceof Player) {
+                        ((Player)he).sendMessage("§cDésolé mais vous ne pouvez pas crafter cet item :(");
+                    }
+                }
+            }
+        }
         if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_CHESTPLATE && e.getInventory().getRecipe().getResult().getEnchantments().size() == 0){
+            e.getInventory().setResult(new ItemStack(Material.AIR));
+            for(HumanEntity he:e.getViewers()) {
+                if(he instanceof Player) {
+                    ((Player)he).sendMessage("§cDésolé mais ce craft est déactivé :(");
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_HELMET && e.getInventory().getRecipe().getResult().getEnchantments().size() == 0){
+            e.getInventory().setResult(new ItemStack(Material.AIR));
+            for(HumanEntity he:e.getViewers()) {
+                if(he instanceof Player) {
+                    ((Player)he).sendMessage("§cDésolé mais ce craft est déactivé :(");
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_BOOTS && e.getInventory().getRecipe().getResult().getEnchantments().size() == 0){
+            e.getInventory().setResult(new ItemStack(Material.AIR));
+            for(HumanEntity he:e.getViewers()) {
+                if(he instanceof Player) {
+                    ((Player)he).sendMessage("§cDésolé mais ce craft est déactivé :(");
+                }
+            }
+        }
+        if(e.getInventory().getRecipe().getResult().getType() == Material.GOLD_LEGGINGS && e.getInventory().getRecipe().getResult().getEnchantments().size() == 0){
             e.getInventory().setResult(new ItemStack(Material.AIR));
             for(HumanEntity he:e.getViewers()) {
                 if(he instanceof Player) {

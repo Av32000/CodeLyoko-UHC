@@ -119,11 +119,67 @@ public class Main extends JavaPlugin {
         pinkSwordMeta.setDisplayName("Lame Rose");
         pinkSword.setItemMeta(pinkSwordMeta);
 
+        ItemStack samurailHelmet = new ItemStack(Material.GOLD_HELMET);
+        samurailHelmet.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
+        samurailHelmet.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        ItemMeta samurailHelmetItemMeta = samurailHelmet.getItemMeta();
+        samurailHelmetItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        samurailHelmetItemMeta.setDisplayName("Samurail Helmet");
+        samurailHelmet.setItemMeta(samurailHelmetItemMeta);
+
+        ItemStack samurailChestplate = new ItemStack(Material.GOLD_CHESTPLATE);
+        samurailChestplate.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
+        samurailChestplate.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        ItemMeta samurailChestplateItemMeta = samurailChestplate.getItemMeta();
+        samurailChestplateItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        samurailChestplateItemMeta.setDisplayName("Samurail Chestplate");
+        samurailChestplate.setItemMeta(samurailChestplateItemMeta);
+
+        ItemStack samurailLeggins = new ItemStack(Material.GOLD_LEGGINGS);
+        samurailLeggins.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
+        samurailLeggins.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        ItemMeta samurailLegginsItemMeta = samurailLeggins.getItemMeta();
+        samurailLegginsItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        samurailLegginsItemMeta.setDisplayName("Samurail Leggings");
+        samurailLeggins.setItemMeta(samurailLegginsItemMeta);
+
+        ItemStack samurailBoots = new ItemStack(Material.GOLD_BOOTS);
+        samurailBoots.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
+        samurailBoots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        ItemMeta samurailBootsItemMeta = samurailBoots.getItemMeta();
+        samurailBootsItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        samurailBootsItemMeta.setDisplayName("Samurail Boots");
+        samurailBoots.setItemMeta(samurailBootsItemMeta);
+
         ShapedRecipe pinkSwordRecipe =  new ShapedRecipe(pinkSword);
         pinkSwordRecipe.shape("OOO","ODO","OOO");
         pinkSwordRecipe.setIngredient('O', Material.OBSIDIAN);
         pinkSwordRecipe.setIngredient('D', Material.DIAMOND);
         getServer().addRecipe(pinkSwordRecipe);
+
+        ShapedRecipe samurailHelmetRecipe =  new ShapedRecipe(samurailHelmet);
+        samurailHelmetRecipe.shape("III","G G");
+        samurailHelmetRecipe.setIngredient('I', Material.IRON_INGOT);
+        samurailHelmetRecipe.setIngredient('G', Material.GOLDEN_APPLE);
+        getServer().addRecipe(samurailHelmetRecipe);
+
+        ShapedRecipe samurailChestplateRecipe =  new ShapedRecipe(samurailChestplate);
+        samurailChestplateRecipe.shape("D D","IDI","III");
+        samurailChestplateRecipe.setIngredient('D', Material.DIAMOND);
+        samurailChestplateRecipe.setIngredient('I', Material.IRON_INGOT);
+        getServer().addRecipe(samurailChestplateRecipe);
+
+        ShapedRecipe samurailLeggingsRecipe =  new ShapedRecipe(samurailLeggins);
+        samurailLeggingsRecipe.shape("III","I I","D D");
+        samurailLeggingsRecipe.setIngredient('D', Material.DIAMOND);
+        samurailLeggingsRecipe.setIngredient('I', Material.IRON_INGOT);
+        getServer().addRecipe(samurailLeggingsRecipe);
+
+        ShapedRecipe samurailBootsRecipe =  new ShapedRecipe(samurailBoots);
+        samurailBootsRecipe.shape("I I","G G");
+        samurailBootsRecipe.setIngredient('G', Material.GOLDEN_APPLE);
+        samurailBootsRecipe.setIngredient('I', Material.IRON_INGOT);
+        getServer().addRecipe(samurailBootsRecipe);
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListeners(this), this);
