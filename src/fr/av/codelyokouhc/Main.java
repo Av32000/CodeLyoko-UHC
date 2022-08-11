@@ -527,6 +527,7 @@ public class Main extends JavaPlugin {
         for (Player player : getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.LEVEL_UP,1f,1f);
         }
+        gameLoop.UpdateScoreBoard();
         gameLoop.cancel();
         rolesLoop.cancel();
         state = GState.FINISH;

@@ -25,6 +25,7 @@ public class GameLoop extends BukkitRunnable {
     private Boolean endPvp = false;
     private int timer = 0;
     private int timerSec = 0;
+    int lyokoTimer = 60;
     public GameLoop(Main main){
         this.main = main;
     }
@@ -73,6 +74,22 @@ public class GameLoop extends BukkitRunnable {
         if(timer == 60){
             main.computerWork = true;
         }
+
+        //Lyoko Damage
+        if(lyokoTimer <= 0){
+            lyokoTimer = 60;
+            for (Player p :
+                    main.getServer().getOnlinePlayers()) {
+                if(main.isInLyoko(p)){
+                    if (main.getRoles().get(p) != GRoles.YumiIshiyama && main.getRoles().get(p) != GRoles.MèreDeYumi && main.getRoles().get(p) != GRoles.PèreDeYumi && main.getRoles().get(p) != GRoles.Odd && main.getRoles().get(p) != GRoles.Kiwi) {
+                        p.damage(2);
+                    }else{
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,999999999,0,false,false));
+                    }
+                }
+            }
+        }
+        lyokoTimer --;
     }
 
     private void SelectRole(){
@@ -205,7 +222,7 @@ public class GameLoop extends BukkitRunnable {
         }
     }
 
-    private void UpdateScoreBoard(){
+    public void UpdateScoreBoard(){
         for (Player player:main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() != GameMode.SPECTATOR){
                 ScoreboardManagerUtils smu = new ScoreboardManagerUtils();

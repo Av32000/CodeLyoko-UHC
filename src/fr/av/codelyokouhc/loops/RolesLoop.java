@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class RolesLoop extends BukkitRunnable {
     Main main;
-    ItemStack enchantedWillBoots = null;
     InfectLoop il = null;
 
     boolean franzGetPseudo = false;
