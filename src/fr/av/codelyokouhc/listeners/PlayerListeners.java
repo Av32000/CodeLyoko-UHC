@@ -65,6 +65,11 @@ public class PlayerListeners implements Listener {
         }
 
         player.getInventory().clear();
+        player.setExp(0);
+        player.getInventory().setBoots(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setHelmet(null);
         player.setFoodLevel(20);
         player.setLevel(0);
         player.setMaxHealth(20);
