@@ -17,7 +17,9 @@ import fr.av.codelyokouhc.listeners.DammageListeners;
 import fr.av.codelyokouhc.listeners.HealthListeners;
 import fr.av.codelyokouhc.listeners.PlayerListeners;
 import fr.av.codelyokouhc.loops.AnswerLoop;
+import fr.av.codelyokouhc.loops.GameLoop;
 import fr.av.codelyokouhc.loops.RemoveKilledPlayerLoop;
+import fr.av.codelyokouhc.loops.RolesLoop;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -46,6 +48,8 @@ public class Main extends JavaPlugin {
     private List<GRoles> nonAttribuateRoles = new ArrayList<>();
     private Map<Player, Location> inLyokoPlayer = new HashMap<>();
     private int episode = 0;
+    public GameLoop gameLoop = null;
+    public RolesLoop rolesLoop = null;
 
     //Reset when episode change
     private boolean jeremyCanVanish = true;
@@ -81,6 +85,7 @@ public class Main extends JavaPlugin {
         getCommand("lyokoTp").setExecutor(new LyokoTp(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("cl").setExecutor(new CLCommand(this));
+        getCommand("checkWin").setExecutor(new CheckWinCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
@@ -282,6 +287,7 @@ public class Main extends JavaPlugin {
             ulrichGirl.setMaxHealth(8);
             ulrichGirl.setHealth(8);
         }
+        CheckWin();
     }
 
     public Boolean playerIsAt(Player player1, Player player2, float dist){
@@ -433,5 +439,96 @@ public class Main extends JavaPlugin {
                 break;
         }
         player.sendMessage(msg);
+    }
+    public void CheckWin(){
+        int lyoko = 0;
+        int XANA = 0;
+        int OddKiwi = 0;
+        int Yumi = 0;
+
+        for (Player player : getServer().getOnlinePlayers()) {
+            if(player.getGameMode() == GameMode.SURVIVAL){
+                GRoles role = roles.get(player);
+                switch (role){
+                    case AelitaSchaeffer:
+                    case JeanPierreDelmas:
+                    case JeremyBelpois:
+                    case JimMoralés:
+                    case MillySolovieff:
+                    case TamiyaDiop:
+                    case Hervé:
+                    case Nicolas:
+                    case Sisi:
+                    case SuzanneHertz:
+                    case UlrichStern:
+                        lyoko ++;
+                        break;
+                    case ChefDuXana:
+                    case Kalamar:
+                    case ChefMegaTank:
+                    case Agent:
+                        XANA++;
+                        break;
+                    case Odd:
+                    case Kiwi:
+                        OddKiwi++;
+                        break;
+                    case WilliamDunba:
+                        if(franzInfected != null) XANA++;
+                        else lyoko++;
+                        break;
+                    case YumiIshiyama:
+                    case MèreDeYumi:
+                    case PèreDeYumi:
+                        Yumi++;
+                        break;
+                }
+            }
+        }
+        if(lyoko > 0 && XANA ==0 && OddKiwi == 0 && Yumi ==0) Win("Lyoko");
+        else if(lyoko ==0 && XANA > 0 && OddKiwi == 0 && Yumi == 0) Win("XANA");
+        else if(lyoko ==0 && XANA == 0 && OddKiwi > 0 && Yumi == 0) Win("Odd/Kiwi");
+        else if(lyoko ==0 && XANA == 0 && OddKiwi == 0 && Yumi > 0) Win("Yumi");
+    }
+
+    public void Win(String winers){
+        for (Player player : roles.keySet()) {
+            if(player.getGameMode() != GameMode.SURVIVAL){
+                Bukkit.broadcastMessage("§c" + player.getDisplayName() + " : " + roles.get(player).toString());
+            }else{
+                Bukkit.broadcastMessage("§b" + player.getDisplayName() + " : " + roles.get(player).toString());
+            }
+        }
+        switch (winers){
+            case "Lyoko":
+                Bukkit.broadcastMessage("§aVictoire des Guerriers du Lyoko");
+                break;
+            case "XANA":
+                Bukkit.broadcastMessage("§aVictoire des membres du XANA");
+                break;
+            case "Odd/Kiwi":
+                boolean kiwi = getPlayerByRole(GRoles.Kiwi) != null;
+                boolean odd = getPlayerByRole(GRoles.Odd) != null;
+                if(kiwi && odd) Bukkit.broadcastMessage("§aVictoire de Odd et de Kiwi");
+                else if(kiwi) Bukkit.broadcastMessage("§aVictoire de Kiwi");
+                else Bukkit.broadcastMessage("§aVictoire de Odd");
+                break;
+            case "Yumi":
+                boolean yumi = getPlayerByRole(GRoles.YumiIshiyama) != null;
+                boolean m = getPlayerByRole(GRoles.MèreDeYumi) != null;
+                boolean p = getPlayerByRole(GRoles.PèreDeYumi) != null;
+                if(yumi && m && p) Bukkit.broadcastMessage("§aVictoire de Yumi et ses parents");
+                else if(yumi && m && !p) Bukkit.broadcastMessage("§aVictoire de Yumi et sa mère");
+                else if(yumi && !m && p) Bukkit.broadcastMessage("§aVictoire de Yumi et son père");
+                else if(yumi && !m && !p) Bukkit.broadcastMessage("§aVictoire de Yumi");
+                else Bukkit.broadcastMessage("§aVictoire des parents de Yumi");
+                break;
+        }
+        for (Player player : getServer().getOnlinePlayers()) {
+            player.playSound(player.getLocation(), Sound.LEVEL_UP,1f,1f);
+        }
+        gameLoop.cancel();
+        rolesLoop.cancel();
+        state = GState.FINISH;
     }
 }

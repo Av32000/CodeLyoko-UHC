@@ -55,6 +55,7 @@ public class StartGameCommand implements CommandExecutor {
         Bukkit.broadcastMessage("Lancement des taches...");
         GameLoop start = new GameLoop(main);
         start.runTaskTimer(main, 0, 20);
+        main.gameLoop = start;
         Bukkit.broadcastMessage("Taches lancées !");
         Bukkit.broadcastMessage("§aC'est parti !");
         main.setState(GState.MINING);
