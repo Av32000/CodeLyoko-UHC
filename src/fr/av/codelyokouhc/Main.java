@@ -50,6 +50,7 @@ public class Main extends JavaPlugin {
     private int episode = 0;
     public GameLoop gameLoop = null;
     public RolesLoop rolesLoop = null;
+    public int worldBorder = 1500;
 
     //Reset when episode change
     private boolean jeremyCanVanish = true;
@@ -86,6 +87,7 @@ public class Main extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("cl").setExecutor(new CLCommand(this));
         getCommand("checkWin").setExecutor(new CheckWinCommand(this));
+        getCommand("setBorder").setExecutor(new SetBorderCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
@@ -94,6 +96,8 @@ public class Main extends JavaPlugin {
         generateFactory(factorySpawn);
 
         Bukkit.createWorld(new WorldCreator("lyoko"));
+
+        setWorldBorder(worldBorder);
 
         setState(GState.WAITINGPLAYERS);
         nonAttribuateRoles.add(GRoles.AelitaSchaeffer);
@@ -310,6 +314,14 @@ public class Main extends JavaPlugin {
         {
             e.printStackTrace();
         }
+    }
+
+    public void setWorldBorder(int dist){
+        WorldBorder border = getServer().getWorld("world").getWorldBorder();
+        border.setSize(dist*2);
+        border.setDamageAmount(2);
+        border.setDamageBuffer(2);
+        border.setCenter(0,0);
     }
 
     public Boolean playerIsAt(Player player1, Player player2, float dist){

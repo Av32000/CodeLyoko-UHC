@@ -36,5 +36,9 @@ commands:
     description: Permet de vérifier si le jeu est finis
     permission: codelyoko.admin
 
+  setBorder:
+    description: Définis la distance du centre de la world border
+    permission: codelyoko.admin
+
   cl:
     description: Commandes relatives au CodeLyoko-UHC

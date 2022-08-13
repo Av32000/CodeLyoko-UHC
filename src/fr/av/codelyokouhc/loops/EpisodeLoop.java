@@ -30,5 +30,9 @@ public class EpisodeLoop extends BukkitRunnable {
         for (Player player : main.getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
         }
+        if(main.getEpisode() == 7){
+            ReduceWorldBorderLoop reduceWorldBorderLoop = new ReduceWorldBorderLoop(main);
+            reduceWorldBorderLoop.runTaskTimer(main,1,60);
+        }
     }
 }

@@ -228,12 +228,12 @@ public class GameLoop extends BukkitRunnable {
                 ScoreboardManagerUtils smu = new ScoreboardManagerUtils();
                 Map<String,Integer> values = new HashMap<>();
                 if(main.getEpisode() != 0){
-                    values.put("   ", 9);
-                    values.put("§aEpisode : " + main.getEpisode(), 8);
+                    values.put("   ", 11);
+                    values.put("§aEpisode : " + main.getEpisode(), 10);
                 }
-                values.put(" ", 7);
+                values.put(" ", 9);
                 if(endRole){
-                    values.put("§6Role : §e" + main.getRoles().get(player).toString(), 6);
+                    values.put("§6Role : §e" + main.getRoles().get(player).toString(), 8);
                 }else{
                     String text = "";
                     if(role < 10){
@@ -247,10 +247,10 @@ public class GameLoop extends BukkitRunnable {
                     }else{
                         text = text + roleSec;
                     }
-                    values.put("§6Roles : §e" + text, 6);
+                    values.put("§6Roles : §e" + text, 8);
                 }
                 if(endPvp){
-                    values.put("§bPvP : §aActivé", 5);
+                    values.put("§bPvP : §aActivé", 7);
                 }else{
                     String text = "";
                     if(pvp < 10){
@@ -264,9 +264,9 @@ public class GameLoop extends BukkitRunnable {
                     }else{
                         text = text + pvpsSec;
                     }
-                    values.put("§bPvP : §3" + text, 5);
+                    values.put("§bPvP : §3" + text, 7);
                 }
-                values.put("", 4);
+                values.put("", 6);
                 String timerText = "";
                 if(timer < 10){
                     timerText = timerText + "0" + timer;
@@ -279,7 +279,9 @@ public class GameLoop extends BukkitRunnable {
                 }else{
                     timerText = timerText + timerSec;
                 }
-                values.put("§eTimer : " + timerText, 3);
+                values.put("§eTimer : " + timerText, 5);
+                values.put("       ",  4);
+                values.put("§dBorder : " + main.worldBorder, 3);
                 values.put("     ",  2);
                 if(Integer.parseInt(main.getPlayerCount()) > 1){
                     values.put("§c" + main.getPlayerCount() + " joueurs", 1);
@@ -291,9 +293,13 @@ public class GameLoop extends BukkitRunnable {
             else{
                 ScoreboardManagerUtils smu = new ScoreboardManagerUtils();
                 Map<String,Integer> values = new HashMap<>();
-                values.put(" ", 7);
+                if(main.getEpisode() != 0){
+                    values.put("   ", 11);
+                    values.put("§aEpisode : " + main.getEpisode(), 10);
+                }
+                values.put(" ", 9);
                 if(endRole){
-                    values.put("§eRoles : §aRévélés", 6);
+                    values.put("§eRoles : §aRévélés", 8);
                 }else{
                     String text = "";
                     if(role < 10){
@@ -307,10 +313,10 @@ public class GameLoop extends BukkitRunnable {
                     }else{
                         text = text + roleSec;
                     }
-                    values.put("§eRoles : §a" + text, 6);
+                    values.put("§eRoles : §a" + text, 8);
                 }
                 if(endPvp){
-                    values.put("§bPvP : §3Activé", 5);
+                    values.put("§bPvP : §3Activé", 7);
                 }else{
                     String text = "";
                     if(pvp < 10){
@@ -324,9 +330,9 @@ public class GameLoop extends BukkitRunnable {
                     }else{
                         text = text + pvpsSec;
                     }
-                    values.put("§bPvP : §3" + text, 5);
+                    values.put("§bPvP : §3" + text, 7);
                 }
-                values.put("", 4);
+                values.put("", 6);
                 String timerText = "";
                 if(timer < 10){
                     timerText = timerText + "0" + timer;
@@ -339,8 +345,10 @@ public class GameLoop extends BukkitRunnable {
                 }else{
                     timerText = timerText + timerSec;
                 }
-                values.put("§eTimer : " + timerText, 3);
-                values.put("     ",2);
+                values.put("§eTimer : " + timerText, 5);
+                values.put("          ", 4);
+                values.put("§dBorder : " + main.worldBorder, 3);
+                values.put("     ",  2);
                 if(Integer.parseInt(main.getPlayerCount()) > 1){
                     values.put("§c" + main.getPlayerCount() + " joueurs", 1);
                 }else{
