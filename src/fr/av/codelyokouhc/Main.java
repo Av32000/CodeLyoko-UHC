@@ -239,6 +239,7 @@ public class Main extends JavaPlugin {
         killedPlayer.put(player, player.getLocation());
         RemoveKilledPlayerLoop rkpl = new RemoveKilledPlayerLoop(this, player);
         rkpl.runTaskTimer(this, 1,20);
+        DropInventory(player);
         player.setGameMode(GameMode.SPECTATOR);
         for (Player p : getServer().getOnlinePlayers()) {
             p.playSound(p.getLocation(), Sound.WITHER_SPAWN, 1.0f, 1.0f);
@@ -288,6 +289,27 @@ public class Main extends JavaPlugin {
             ulrichGirl.setHealth(8);
         }
         CheckWin();
+    }
+
+    public void DropInventory(Player player){
+        try
+        {
+            for (ItemStack itemStack : player.getInventory().getArmorContents()) {
+                if(itemStack != null && itemStack.getType() != Material.AIR){
+                    player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+                }
+            }
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if(itemStack != null && itemStack.getType() != Material.AIR){
+                    player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+                }
+            }
+            player.getWorld().dropItemNaturally(player.getLocation(), new ItemStack(Material.GOLDEN_APPLE));
+        }
+        catch(IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public Boolean playerIsAt(Player player1, Player player2, float dist){
