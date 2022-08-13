@@ -76,7 +76,7 @@ public class PlayerListeners implements Listener {
         player.setHealth(20);
         RemovePotionEffect(player);
         player.setGameMode(GameMode.ADVENTURE);
-
+        if(Bukkit.getAllowNether()) player.sendMessage("§c/!\\WARNING/!\\ Nether is enable !");
         UpdatePLayersScoreBoard();
     }
 
