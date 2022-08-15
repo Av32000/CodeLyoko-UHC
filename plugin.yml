@@ -44,5 +44,9 @@ commands:
     description: Ouvre le menu de configuration du jeu
     permission: codelyoko.admin
 
+  generateFactory:
+    description: Génère l'usine
+    permission: codelyoko.admin
+
   cl:
     description: Commandes relatives au CodeLyoko-UHC

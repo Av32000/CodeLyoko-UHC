@@ -94,12 +94,7 @@ public class Main extends JavaPlugin {
         getCommand("checkWin").setExecutor(new CheckWinCommand(this));
         getCommand("setBorder").setExecutor(new SetBorderCommand(this));
         getCommand("config").setExecutor(new ConfigCommand(this));
-
-        Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
-        int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);
-        factorySpawn = new Location(factorySpawn.getWorld(), factorySpawn.getX(), y, factorySpawn.getZ());
-        System.out.println(factorySpawn);
-        generateFactory(factorySpawn);
+        getCommand("generateFactory").setExecutor(new GenerateFactoryCommand(this));
 
         Bukkit.createWorld(new WorldCreator("lyoko"));
 
@@ -385,7 +380,7 @@ public class Main extends JavaPlugin {
         else return null;
     }
 
-    private void generateFactory(Location location){
+    public void generateFactory(Location location){
         WorldEditPlugin worldEdit = getWorldEdit();
         File shematic = new File(getDataFolder(), "factory.schematic");
         EditSession session = worldEdit.getWorldEdit().getEditSessionFactory().getEditSession(new BukkitWorld(location.getWorld()), 999999);
