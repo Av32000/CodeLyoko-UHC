@@ -89,6 +89,7 @@ public class Main extends JavaPlugin {
         getCommand("cl").setExecutor(new CLCommand(this));
         getCommand("checkWin").setExecutor(new CheckWinCommand(this));
         getCommand("setBorder").setExecutor(new SetBorderCommand(this));
+        getCommand("config").setExecutor(new ConfigCommand(this));
 
         Location factorySpawn = new Location(getServer().getWorld("world"), new Random().nextInt(500 - (-500)) + (-500), 0, new Random().nextInt(500 - (-500)) + (-500));
         int y = factorySpawn.getWorld().getHighestBlockYAt(factorySpawn);

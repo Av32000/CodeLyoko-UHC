@@ -40,5 +40,9 @@ commands:
     description: Définis la distance du centre de la world border
     permission: codelyoko.admin
 
+  config:
+    description: Ouvre le menu de configuration du jeu
+    permission: codelyoko.admin
+
   cl:
     description: Commandes relatives au CodeLyoko-UHC
