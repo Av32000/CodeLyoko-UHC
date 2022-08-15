@@ -18,9 +18,9 @@ import java.util.*;
 public class GameLoop extends BukkitRunnable {
     Main main;
     private int role = 0;
-    private int roleSec = 10;
+    private int roleSec = 0;
     private int pvp = 1;
-    private int pvpsSec = 59;
+    private int pvpsSec = 0;
     private Boolean endRole = false;
     private Boolean endPvp = false;
     private int timer = 0;
@@ -28,6 +28,8 @@ public class GameLoop extends BukkitRunnable {
     int lyokoTimer = 60;
     public GameLoop(Main main){
         this.main = main;
+        this.role = main.timeBeforeRoles;
+        this.pvp = main.timeBeforePVP;
     }
     @Override
     public void run() {

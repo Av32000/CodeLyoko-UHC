@@ -22,25 +22,24 @@ public class ConfigCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
         if(!main.isState(GState.WAITINGPLAYERS)){
-            player.sendMessage("§cLa partie à déjà commencé");
+            player.sendMessage("§cLa partie à déjà commencée");
             return false;
         }
-        Inventory inv = Bukkit.createInventory(null, 27, "Configuration");
 
-        //Add Orange Glass Decoration
-        ItemStack border = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 10);
-        ItemMeta meta = border.getItemMeta();
-        meta.setDisplayName("Config");
-        border.setItemMeta(meta);
+        Inventory inv = main.generateConfigInventory("Configuration", 27);
 
-        for (int i = 0; i <9;i++){
-            inv.setItem(i, border);
-        }
-        for (int i = 18; i <27;i++){
-            inv.setItem(i, border);
-        }
-        inv.setItem(9, border);
-        inv.setItem(17, border);
+        ItemStack clock = new ItemStack(Material.WATCH);
+        ItemMeta clockMeta = clock.getItemMeta();;
+        clockMeta.setDisplayName("§eGestion des Timers");
+        clock.setItemMeta(clockMeta);
+
+        ItemStack bookshelf = new ItemStack(Material.BOOKSHELF);
+        ItemMeta bookshelfMeta = bookshelf.getItemMeta();
+        bookshelfMeta.setDisplayName("§dGestion des Rôles");
+        bookshelf.setItemMeta(bookshelfMeta);
+
+        inv.setItem(12, clock);
+        inv.setItem(14, bookshelf);
 
         player.openInventory(inv);
         return false;

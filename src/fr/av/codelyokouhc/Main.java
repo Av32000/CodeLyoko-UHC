@@ -23,6 +23,7 @@ import fr.av.codelyokouhc.loops.RolesLoop;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -72,6 +73,8 @@ public class Main extends JavaPlugin {
     public boolean millyCanShow = true;
     public Map<Player, Integer> lyokoBoostedPlayer = new HashMap<>();
     public int scanCount = 0;
+    public int timeBeforePVP = 40;
+    public int timeBeforeRoles = 20;
 
     @Override
     public void onEnable() {
@@ -567,5 +570,32 @@ public class Main extends JavaPlugin {
         gameLoop.cancel();
         rolesLoop.cancel();
         state = GState.FINISH;
+    }
+
+    public Inventory generateConfigInventory(String name, int size){
+        Inventory inv = Bukkit.createInventory(null, size, name);
+
+        //Add Purple Glass Decoration
+        ItemStack border = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 10);
+        ItemMeta borderMeta = border.getItemMeta();
+        borderMeta.setDisplayName(" ");
+        border.setItemMeta(borderMeta);
+
+        ItemStack quitBtn = new ItemStack(Material.BARRIER);
+        ItemMeta quitMeta = quitBtn.getItemMeta();
+        quitMeta.setDisplayName("§cQuitter");
+        quitBtn.setItemMeta(quitMeta);
+
+        for (int i = 0; i <9;i++){
+            inv.setItem(i, border);
+        }
+        for (int i = 18; i <26;i++){
+            inv.setItem(i, border);
+        }
+        inv.setItem(9, border);
+        inv.setItem(17, border);
+        inv.setItem(26, quitBtn);
+
+        return inv;
     }
 }

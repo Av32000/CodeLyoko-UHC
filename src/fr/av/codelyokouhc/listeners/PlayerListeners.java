@@ -270,6 +270,166 @@ public class PlayerListeners implements Listener {
         if(inv.getName().startsWith("Inventaire de")){
             e.setCancelled(true);
         }
+
+        if(inv.getName().equalsIgnoreCase("Configuration")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) p.closeInventory();
+            if(nameIs(current,"§eGestion des Timers")){
+                Inventory invc = main.generateConfigInventory("Configuration des Timers", 27);
+
+                ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+                ItemMeta swordItemMeta = sword.getItemMeta();
+                swordItemMeta.setDisplayName("§3Temps avant PVP");
+                sword.setItemMeta(swordItemMeta);
+
+                ItemStack book = new ItemStack(Material.BOOK);
+                ItemMeta bookItemMeta = book.getItemMeta();
+                bookItemMeta.setDisplayName("§eTemps avant Rôles");
+                book.setItemMeta(bookItemMeta);
+
+                invc.setItem(12, sword);
+                invc.setItem(14, book);
+
+                p.closeInventory();
+                p.openInventory(invc);
+            }
+            if(nameIs(current, "§dGestion des Rôles")){
+                p.sendMessage("§dComming soon...");
+            }
+        }
+
+        if(inv.getName().equalsIgnoreCase("Configuration des Timers")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) {
+                p.closeInventory();
+                p.performCommand("config");
+            }
+            if(nameIs(current, "§3Temps avant PVP")){
+                Inventory configPVPInv = main.generateConfigInventory("Temps avant PVP", 27);
+
+                ItemStack redWool = new ItemStack(Material.WOOL,1, (short) 14);
+                ItemMeta redWoolItemMeta = redWool.getItemMeta();
+                redWoolItemMeta.setDisplayName("§cRetirer 1 minute");
+                redWool.setItemMeta(redWoolItemMeta);
+
+                ItemStack limeWool = new ItemStack(Material.WOOL,1, (short) 5);
+                ItemMeta limeWoolItemMeta = limeWool.getItemMeta();
+                limeWoolItemMeta.setDisplayName("§aAjouter 1 minute");
+                limeWool.setItemMeta(limeWoolItemMeta);
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant PVP : §a" + main.timeBeforePVP + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                configPVPInv.setItem(11, redWool);
+                configPVPInv.setItem(13, clock);
+                configPVPInv.setItem(15, limeWool);
+
+                p.closeInventory();
+                p.openInventory(configPVPInv);
+            }
+            if(nameIs(current, "§eTemps avant Rôles")){
+                Inventory configRolesInv = main.generateConfigInventory("Temps avant Rôles", 27);
+
+                ItemStack redWool = new ItemStack(Material.WOOL,1, (short) 14);
+                ItemMeta redWoolItemMeta = redWool.getItemMeta();
+                redWoolItemMeta.setDisplayName("§cRetirer 1 minute");
+                redWool.setItemMeta(redWoolItemMeta);
+
+                ItemStack limeWool = new ItemStack(Material.WOOL,1, (short) 5);
+                ItemMeta limeWoolItemMeta = limeWool.getItemMeta();
+                limeWoolItemMeta.setDisplayName("§aAjouter 1 minute");
+                limeWool.setItemMeta(limeWoolItemMeta);
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant Rôles : §a" + main.timeBeforeRoles + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                configRolesInv.setItem(11, redWool);
+                configRolesInv.setItem(13, clock);
+                configRolesInv.setItem(15, limeWool);
+
+                p.closeInventory();
+                p.openInventory(configRolesInv);
+            }
+        }
+
+        if(inv.getName().equalsIgnoreCase("Temps avant PVP")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) {
+                p.closeInventory();
+                p.performCommand("config");
+            }
+            if(nameIs(current, "§aAjouter 1 minute")){
+                main.timeBeforePVP ++;
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant PVP : §a" + main.timeBeforePVP + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                inv.setItem(13,clock);
+                p.updateInventory();
+            }
+            if(nameIs(current, "§cRetirer 1 minute")){
+                if(main.timeBeforePVP == 1){
+                    p.sendMessage("§cVous en pouvez pas descendre en dessous de 1 minute !");
+                    return;
+                }
+                main.timeBeforePVP --;
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant PVP : §a" + main.timeBeforePVP + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                inv.setItem(13,clock);
+                p.updateInventory();
+            }
+        }
+
+        if(inv.getName().equalsIgnoreCase("Temps avant Rôles")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) {
+                p.closeInventory();
+                p.performCommand("config");
+            }
+            if(nameIs(current, "§aAjouter 1 minute")){
+                main.timeBeforeRoles ++;
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant Rôles : §a" + main.timeBeforeRoles + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                inv.setItem(13,clock);
+                p.updateInventory();
+            }
+            if(nameIs(current, "§cRetirer 1 minute")){
+                if(main.timeBeforeRoles == 1){
+                    p.sendMessage("§cVous en pouvez pas descendre en dessous de 1 minute !");
+                    return;
+                }
+                main.timeBeforeRoles --;
+
+                ItemStack clock = new ItemStack(Material.WATCH);
+                ItemMeta clockMeta = clock.getItemMeta();;
+                clockMeta.setDisplayName("§bTemps avant Rôles : §a" + main.timeBeforeRoles + " minutes");
+                clock.setItemMeta(clockMeta);
+
+                inv.setItem(13,clock);
+                p.updateInventory();
+            }
+        }
+    }
+
+    public boolean nameIs(ItemStack item, String name){
+        if(item != null && item.getItemMeta() != null && item.getItemMeta().getDisplayName() != null && item.getItemMeta().getDisplayName().equalsIgnoreCase(name)){
+            return true;
+        }
+        return false;
     }
 
     @EventHandler
