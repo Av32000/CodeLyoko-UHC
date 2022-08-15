@@ -261,6 +261,12 @@ public class PlayerListeners implements Listener {
             }
         }
 
+        if(inv.getName().equalsIgnoreCase("Menu Spectateur")){
+            e.setCancelled(true);
+            p.closeInventory();
+            p.teleport(main.getServer().getPlayer(current.getItemMeta().getDisplayName().split("§a")[1]).getLocation());
+        }
+
         if(inv.getName().startsWith("Inventaire de")){
             e.setCancelled(true);
         }
