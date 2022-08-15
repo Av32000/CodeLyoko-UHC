@@ -51,6 +51,10 @@ public class DammageListeners implements Listener {
                     main.blocks.put((Player) e.getDamager(), newMultiplicator);
                 }
             }
+            if(main.lyokoBoostedPlayer.containsKey(e.getDamager())){
+                e.setDamage(e.getFinalDamage() * (1 + (main.lyokoBoostedPlayer.get(e.getDamager()) * 0.2)));
+                e.getDamager().sendMessage("Vos dégats on été multipliés par " + (1 + (main.lyokoBoostedPlayer.get(e.getDamager()) * 0.2)));
+            }
         }
 
         if(e.getDamager() instanceof Arrow){

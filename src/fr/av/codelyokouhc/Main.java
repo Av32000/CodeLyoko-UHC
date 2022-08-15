@@ -70,6 +70,7 @@ public class Main extends JavaPlugin {
     public boolean aelitaCanJump = true;
     public boolean computerWork = false;
     public boolean millyCanShow = true;
+    public Map<Player, Integer> lyokoBoostedPlayer = new HashMap<>();
     public int scanCount = 0;
 
     @Override

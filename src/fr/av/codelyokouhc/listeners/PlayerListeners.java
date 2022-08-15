@@ -227,6 +227,16 @@ public class PlayerListeners implements Listener {
 
             p.openInventory(playerListInventory);
         }
+
+        if(e.getMaterial() == Material.NETHER_STAR){
+            if(main.lyokoBoostedPlayer.containsKey(p)){
+                main.lyokoBoostedPlayer.replace(p, main.lyokoBoostedPlayer.get(p) + 1);
+            }else{
+                main.lyokoBoostedPlayer.put(p,1);
+            }
+            p.sendMessage("§cLa puissance du Lyoko entre en vous et boost vos dégats de " + main.lyokoBoostedPlayer.get(p) * 20 + "% !");
+            p.getInventory().remove(e.getItem());
+        }
     }
 
     @EventHandler
