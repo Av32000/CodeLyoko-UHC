@@ -36,8 +36,8 @@ public class GameLoop extends BukkitRunnable {
         UpdateScoreBoard();
         if(role == 0 && roleSec == 0 && !endRole){
             main.setState(GState.Role);
-            SelectRole();
             endRole = true;
+            SelectRole();
         }
         if(pvp == 0 && pvpsSec == 0 && !endPvp){
             main.setState(GState.PVP);
@@ -100,18 +100,34 @@ public class GameLoop extends BukkitRunnable {
         RolesLoop rolesLoop = new RolesLoop(main);
         rolesLoop.runTaskTimer(main, 0,1);
         main.rolesLoop = rolesLoop;
+
         for (GRoles role : main.disabledRoles) {
             main.getNonAttribuateRoles().remove(role);
         }
+
+        int nbAgents = main.getServer().getOnlinePlayers().size() - main.getNonAttribuateRoles().size();
+        List<Player> agents = new ArrayList<>();
+        if(nbAgents > 0){
+            for (int i = nbAgents; i > 0; i--){
+                Random rnd = new Random();
+                int index = rnd.nextInt(main.getServer().getOnlinePlayers().size());
+                agents.add((Player) main.getServer().getOnlinePlayers().toArray()[index]);
+            }
+        }
+
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
-                Random rnd = new Random();
-                int index = rnd.nextInt(main.getNonAttribuateRoles().size() + 2);
-                if(index < main.getNonAttribuateRoles().size()){
-                    main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
-                    main.getNonAttribuateRoles().remove(index);
-                }else{
+                if(main.getNonAttribuateRoles().size() == 0){
                     main.getRoles().put(player, GRoles.Agent);
+                }else{
+                    Random rnd = new Random();
+                    int index = rnd.nextInt(main.getNonAttribuateRoles().size());
+                    if(!agents.contains(player)){
+                        main.getRoles().put(player, main.getNonAttribuateRoles().get(index));
+                        main.getNonAttribuateRoles().remove(index);
+                    }else{
+                        main.getRoles().put(player, GRoles.Agent);
+                    }
                 }
                 player.sendMessage("§a====================");
                 player.sendMessage("Vous etes : §e" + main.getRoles().get(player).toString());
