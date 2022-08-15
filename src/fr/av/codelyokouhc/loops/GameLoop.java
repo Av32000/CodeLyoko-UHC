@@ -100,6 +100,9 @@ public class GameLoop extends BukkitRunnable {
         RolesLoop rolesLoop = new RolesLoop(main);
         rolesLoop.runTaskTimer(main, 0,1);
         main.rolesLoop = rolesLoop;
+        for (GRoles role : main.disabledRoles) {
+            main.getNonAttribuateRoles().remove(role);
+        }
         for (Player player : main.getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 Random rnd = new Random();

@@ -75,6 +75,7 @@ public class Main extends JavaPlugin {
     public int scanCount = 0;
     public int timeBeforePVP = 40;
     public int timeBeforeRoles = 20;
+    public List<GRoles> disabledRoles = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -123,6 +124,8 @@ public class Main extends JavaPlugin {
         nonAttribuateRoles.add(GRoles.YumiIshiyama);
         nonAttribuateRoles.add(GRoles.MèreDeYumi);
         nonAttribuateRoles.add(GRoles.PèreDeYumi);
+        nonAttribuateRoles.add(GRoles.Kalamar);
+        nonAttribuateRoles.add(GRoles.ChefMegaTank);
 
         ItemStack pinkSword = new ItemStack(Material.GOLD_SWORD);
         pinkSword.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
@@ -589,12 +592,42 @@ public class Main extends JavaPlugin {
         for (int i = 0; i <9;i++){
             inv.setItem(i, border);
         }
-        for (int i = 18; i <26;i++){
+        for (int i = size - 9; i <size;i++){
             inv.setItem(i, border);
         }
-        inv.setItem(9, border);
-        inv.setItem(17, border);
-        inv.setItem(26, quitBtn);
+        if(size >18){
+            inv.setItem(9, border);
+            inv.setItem(17, border);
+        }
+        if(size > 27){
+            inv.setItem(18, border);
+            inv.setItem(26, border);
+        }
+        if(size > 36){
+            inv.setItem(27, border);
+            inv.setItem(35, border);
+        }
+        if(size > 45){
+            inv.setItem(36, border);
+            inv.setItem(44, border);
+        }
+        if(size > 54){
+            inv.setItem(45, border);
+            inv.setItem(53, border);
+        }
+        if(size > 63){
+            inv.setItem(54, border);
+            inv.setItem(62, border);
+        }
+        if(size > 72){
+            inv.setItem(63, border);
+            inv.setItem(71, border);
+        }
+        if(size > 81){
+            inv.setItem(72, border);
+            inv.setItem(80, border);
+        }
+        inv.setItem(size - 1, quitBtn);
 
         return inv;
     }

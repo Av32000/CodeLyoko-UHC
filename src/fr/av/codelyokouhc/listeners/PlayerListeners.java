@@ -294,8 +294,45 @@ public class PlayerListeners implements Listener {
                 p.openInventory(invc);
             }
             if(nameIs(current, "§dGestion des Rôles")){
-                p.sendMessage("§dComming soon...");
+                Inventory rolesInv = main.generateConfigInventory("Configuration des Rôles", 45);
+
+                rolesInv = GenerateRolesConfigInv(rolesInv);
+
+                p.closeInventory();
+                p.openInventory(rolesInv);
             }
+        }
+
+        if(inv.getName().equalsIgnoreCase("Configuration des Rôles")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) {
+                p.closeInventory();
+                p.performCommand("config");
+                return;
+            }
+            if(nameIs(current," ")) return;
+            if(current.getItemMeta().getDisplayName().startsWith("§a")){
+                main.disabledRoles.add(GRoles.valueOf(current.getItemMeta().getDisplayName().split("§a")[1]));
+
+                ItemStack redWool = new ItemStack(Material.WOOL,1, (short) 14);
+                ItemMeta redWoolItemMeta = redWool.getItemMeta();
+                redWoolItemMeta.setDisplayName("§c" + current.getItemMeta().getDisplayName().split("§a")[1]);
+                redWool.setItemMeta(redWoolItemMeta);
+
+                inv.setItem(Arrays.asList(inv.getContents()).indexOf(current), redWool);
+                p.updateInventory();
+            } else if (current.getItemMeta().getDisplayName().startsWith("§c")) {
+                main.disabledRoles.remove(GRoles.valueOf(current.getItemMeta().getDisplayName().split("§c")[1]));
+
+                ItemStack limeWool = new ItemStack(Material.WOOL,1, (short) 5);
+                ItemMeta limeWoolItemMeta = limeWool.getItemMeta();
+                limeWoolItemMeta.setDisplayName("§a" + GRoles.valueOf(current.getItemMeta().getDisplayName().split("§c")[1]));
+                limeWool.setItemMeta(limeWoolItemMeta);
+
+                inv.setItem(Arrays.asList(inv.getContents()).indexOf(current), limeWool);
+                p.updateInventory();
+            }
+
         }
 
         if(inv.getName().equalsIgnoreCase("Configuration des Timers")){
@@ -423,6 +460,30 @@ public class PlayerListeners implements Listener {
                 p.updateInventory();
             }
         }
+    }
+
+    public Inventory GenerateRolesConfigInv(Inventory inv){
+        for (GRoles role : main.getNonAttribuateRoles()) {
+            if (role != GRoles.Agent) {
+                if(main.disabledRoles.contains(role)){
+                    ItemStack redWool = new ItemStack(Material.WOOL,1, (short) 14);
+                    ItemMeta redWoolItemMeta = redWool.getItemMeta();
+                    redWoolItemMeta.setDisplayName("§c" + role);
+                    redWool.setItemMeta(redWoolItemMeta);
+
+                    inv.addItem(redWool);
+                }else{
+                    ItemStack limeWool = new ItemStack(Material.WOOL,1, (short) 5);
+                    ItemMeta limeWoolItemMeta = limeWool.getItemMeta();
+                    limeWoolItemMeta.setDisplayName("§a" + role);
+                    limeWool.setItemMeta(limeWoolItemMeta);
+
+                    inv.addItem(limeWool);
+                }
+            }
+        }
+
+        return inv;
     }
 
     public boolean nameIs(ItemStack item, String name){
