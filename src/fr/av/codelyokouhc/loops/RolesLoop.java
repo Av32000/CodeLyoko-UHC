@@ -143,6 +143,16 @@ public class RolesLoop extends BukkitRunnable {
                 main.franzCanInfect = false;
             }
         }
+
+        //Yumi
+        if(main.getPlayerByRole(GRoles.YumiIshiyama) != null){
+            Player yumi = main.getPlayerByRole(GRoles.YumiIshiyama);
+            if(yumi.getInventory().getHelmet() != null && yumi.getInventory().getChestplate() != null && yumi.getInventory().getLeggings() != null && yumi.getInventory().getBoots() != null && yumi.getInventory().getHelmet().getType() == Material.GOLD_HELMET && yumi.getInventory().getChestplate().getType() == Material.GOLD_CHESTPLATE && yumi.getInventory().getLeggings().getType() == Material.GOLD_LEGGINGS && yumi.getInventory().getBoots().getType() == Material.GOLD_BOOTS){
+                yumi.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999999, 1, false,false));
+            }else{
+                yumi.removePotionEffect(PotionEffectType.JUMP);
+            }
+        }
     }
 
     public int GetJPDAliesAround(Player player) {
