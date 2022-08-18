@@ -245,7 +245,7 @@ public class PlayerListeners implements Listener {
         Player p = (Player) e.getWhoClicked();
         ItemStack current = e.getCurrentItem();
 
-        if(current == null) return;
+        if(current == null || current.getType() == Material.AIR) return;
 
         if(inv.getName().equalsIgnoreCase("Liste des Joueurs")){
             e.setCancelled(true);
