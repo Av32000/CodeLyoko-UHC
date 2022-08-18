@@ -90,7 +90,10 @@ public class Main extends JavaPlugin {
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
         getCommand("lyokoTp").setExecutor(new LyokoTp(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
+
         getCommand("cl").setExecutor(new CLCommand(this));
+        getCommand("cl").setTabCompleter(new CLTabCompleter(this));
+
         getCommand("checkWin").setExecutor(new CheckWinCommand(this));
         getCommand("setBorder").setExecutor(new SetBorderCommand(this));
         getCommand("config").setExecutor(new ConfigCommand(this));
