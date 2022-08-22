@@ -85,7 +85,6 @@ public class Main extends JavaPlugin {
 
         getCommand("tpspawn").setExecutor(new TpSpawnCommand());
         getCommand("startGame").setExecutor(new StartGameCommand(this));
-        getCommand("setGameSpawn").setExecutor(new SetGameSpawnCommand(this));
         getCommand("setLyokoSpawn").setExecutor(new SetLyokoSpawnCommand(this));
         getCommand("getRole").setExecutor(new GetRoleCommand(this));
         getCommand("lyokoTp").setExecutor(new LyokoTp(this));
@@ -213,12 +212,6 @@ public class Main extends JavaPlugin {
     }
     public boolean isState(GState state){
         return this.state == state;
-    }
-    public Location getGameSpawn() {
-        return gameSpawn;
-    }
-    public void setGameSpawn(Location gameSpawn) {
-        this.gameSpawn = gameSpawn;
     }
     public Map<Player, GRoles> getRoles() {
         return roles;
@@ -628,5 +621,18 @@ public class Main extends JavaPlugin {
         inv.setItem(size - 1, quitBtn);
 
         return inv;
+    }
+
+    public void ClearPlayer(Player player){
+        player.getInventory().clear();
+        player.setExp(0);
+        player.getInventory().setBoots(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setHelmet(null);
+        player.setFoodLevel(20);
+        player.setLevel(0);
+        player.setMaxHealth(20);
+        player.setHealth(20);
     }
 }

@@ -28,6 +28,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -50,32 +51,10 @@ public class PlayerListeners implements Listener {
         Location spawn = Bukkit.getWorld("world").getSpawnLocation();
         player.teleport(spawn);
 
-        org.bukkit.scoreboard.Scoreboard board = player.getScoreboard();
-        Objective objective = board.getObjective("healthCount");
-        if (objective == null) {
-            objective = board.registerNewObjective("healthCount", "health");
-            player.damage(2);
-            objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-        }else{
-            objective.unregister();
-            objective = board.registerNewObjective("healthCount", "health");
-            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            player.damage(2);
-            objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-        }
-
-        player.getInventory().clear();
-        player.setExp(0);
-        player.getInventory().setBoots(null);
-        player.getInventory().setChestplate(null);
-        player.getInventory().setLeggings(null);
-        player.getInventory().setHelmet(null);
-        player.setFoodLevel(20);
-        player.setLevel(0);
-        player.setMaxHealth(20);
-        player.setHealth(20);
+        main.ClearPlayer(player);
         RemovePotionEffect(player);
         player.setGameMode(GameMode.ADVENTURE);
+
         if(Bukkit.getAllowNether()) player.sendMessage("§c/!\\WARNING/!\\ Nether is enable !");
 
         UpdatePLayersScoreBoard();

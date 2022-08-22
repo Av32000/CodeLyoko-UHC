@@ -12,10 +12,6 @@ commands:
     description: Lance le jeu
     permission: codelyoko.admin
 
-  setGameSpawn:
-    description: Set le point d'apparition des joueurs lorsque le jeu se lance
-    permission: codelyoko.admin
-
   setLyokoSpawn:
     description: Set le point de spawn dans le lyoko
     permission: codelyoko.admin
