@@ -479,6 +479,10 @@ public class Main extends JavaPlugin {
         int OddKiwi = 0;
         int Yumi = 0;
 
+        if(roles.size() < 1){
+            return;
+        }
+
         for (Player player : getServer().getOnlinePlayers()) {
             if(player.getGameMode() == GameMode.SURVIVAL){
                 GRoles role = roles.get(player);
