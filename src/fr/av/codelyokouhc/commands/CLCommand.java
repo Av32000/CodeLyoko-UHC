@@ -58,6 +58,10 @@ public class CLCommand implements CommandExecutor {
             SpectatorCommand spectatorCommand = new SpectatorCommand(main);
             spectatorCommand.onCommand(commandSender, command, s,strings);
         }
+        else if(strings[0].equalsIgnoreCase("object")){
+            CLObjectCommand objectCommand = new CLObjectCommand(main);
+            objectCommand.onCommand(commandSender, command, s,strings);
+        }
         else{
             commandSender.sendMessage("§cCet argument n'existe pas (Voir /cl help)");
         }
@@ -79,5 +83,6 @@ public class CLCommand implements CommandExecutor {
         commandSender.sendMessage("§d/cl spectre §f=> §bLe Chef du XANA transforme l'agent en spectre, il possède un item qui leur donne un fly (5sec)");
         commandSender.sendMessage("§d/cl scan §f=> §bPermet au Chef du XANA de connaitre le nombre d'agent se trouvant à moins de 20 blocs de lui (3 fois)");
         commandSender.sendMessage("§d/cl spectator §f=> §bPermet aux joueurs éliminés de voir les roles des joueurs restants et de se tp à eux");
+        commandSender.sendMessage("§d/cl object §f=> §bPermet aux joueurs qui possède un objet spécial grace à leur rôle de le récupérer en cas de perte");
     }
 }

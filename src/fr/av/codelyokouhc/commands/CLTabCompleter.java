@@ -40,6 +40,12 @@ public class CLTabCompleter implements TabCompleter {
             }else if (role == GRoles.JeremyBelpois){
                 args.add("hide");
                 args.add("revive");
+            }else if(role == GRoles.AelitaSchaeffer){
+                args.add("object");
+            }else if(role == GRoles.JeanPierreDelmas){
+                args.add("object");
+            }else if(role == GRoles.MillySolovieff){
+                args.add("object");
             }
         }
         return args;
