@@ -29,17 +29,24 @@ public class ConfigCommand implements CommandExecutor {
         Inventory inv = main.generateConfigInventory("Configuration", 27);
 
         ItemStack clock = new ItemStack(Material.WATCH);
-        ItemMeta clockMeta = clock.getItemMeta();;
+        ItemMeta clockMeta = clock.getItemMeta();
         clockMeta.setDisplayName("§eGestion des Timers");
         clock.setItemMeta(clockMeta);
+
+        ItemStack book = new ItemStack(Material.BRICK);
+        ItemMeta bookMeta = book.getItemMeta();
+        bookMeta.setDisplayName("§aGestion de la WorldBorder");
+        book.setItemMeta(bookMeta);
 
         ItemStack bookshelf = new ItemStack(Material.BOOKSHELF);
         ItemMeta bookshelfMeta = bookshelf.getItemMeta();
         bookshelfMeta.setDisplayName("§dGestion des Rôles");
         bookshelf.setItemMeta(bookshelfMeta);
 
-        inv.setItem(12, clock);
-        inv.setItem(14, bookshelf);
+        inv.setItem(11, clock);
+        inv.setItem(13, book);
+        inv.setItem(15, bookshelf);
+
 
         player.openInventory(inv);
         return false;

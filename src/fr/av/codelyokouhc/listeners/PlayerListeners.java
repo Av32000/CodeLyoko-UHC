@@ -21,6 +21,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkPopulateEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -281,6 +282,56 @@ public class PlayerListeners implements Listener {
                 p.closeInventory();
                 p.openInventory(rolesInv);
             }
+
+            if(nameIs(current, "§aGestion de la WorldBorder")){
+                Inventory gw = main.generateConfigInventory("Gestion de la WorldBorder", 27);
+
+                ItemStack magentaWool = new ItemStack(Material.WOOL,1, (short) 2);
+                ItemMeta magentaItemMeta = magentaWool.getItemMeta();
+                magentaItemMeta.setDisplayName("§cRetirer 100 blocs");
+                magentaWool.setItemMeta(magentaItemMeta);
+
+                ItemStack purpleWool = new ItemStack(Material.WOOL,1, (short) 10);
+                ItemMeta purpleItemMeta = purpleWool.getItemMeta();
+                purpleItemMeta.setDisplayName("§cRetirer 10 blocs");
+                purpleWool.setItemMeta(purpleItemMeta);
+
+                ItemStack pinkWool = new ItemStack(Material.WOOL,1, (short) 6);
+                ItemMeta pinkItemMeta = pinkWool.getItemMeta();
+                pinkItemMeta.setDisplayName("§cRetirer 1 bloc");
+                pinkWool.setItemMeta(pinkItemMeta);
+
+                ItemStack skyWool = new ItemStack(Material.WOOL,1, (short) 3);
+                ItemMeta skyWoolItemMeta = skyWool.getItemMeta();
+                skyWoolItemMeta.setDisplayName("§aAjouter 1 bloc");
+                skyWool.setItemMeta(skyWoolItemMeta);
+
+                ItemStack cyanWool = new ItemStack(Material.WOOL,1, (short) 9);
+                ItemMeta cyanWoolItemMeta = cyanWool.getItemMeta();
+                cyanWoolItemMeta.setDisplayName("§aAjouter 10 blocs");
+                cyanWool.setItemMeta(cyanWoolItemMeta);
+
+                ItemStack darkBlueWool = new ItemStack(Material.WOOL,1, (short) 11);
+                ItemMeta darkBlueWoolItemMeta = darkBlueWool.getItemMeta();
+                darkBlueWoolItemMeta.setDisplayName("§aAjouter 100 blocs");
+                darkBlueWool.setItemMeta(darkBlueWoolItemMeta);
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                gw.setItem(10, magentaWool);
+                gw.setItem(11, purpleWool);
+                gw.setItem(12, pinkWool);
+                gw.setItem(13, brick);
+                gw.setItem(14, skyWool);
+                gw.setItem(15, cyanWool);
+                gw.setItem(16, darkBlueWool);
+
+                p.closeInventory();
+                p.openInventory(gw);
+            }
         }
 
         if(inv.getName().equalsIgnoreCase("Configuration des Rôles")){
@@ -314,6 +365,7 @@ public class PlayerListeners implements Listener {
             }
 
         }
+
 
         if(inv.getName().equalsIgnoreCase("Configuration des Timers")){
             e.setCancelled(true);
@@ -404,6 +456,98 @@ public class PlayerListeners implements Listener {
 
                 inv.setItem(13,clock);
                 p.updateInventory();
+            }
+        }
+
+        if(inv.getName().equalsIgnoreCase("Gestion de la WorldBorder")){
+            e.setCancelled(true);
+            if(nameIs(current,"§cQuitter")) {
+                p.closeInventory();
+                p.performCommand("config");
+            }
+            if(nameIs(current, "§aAjouter 1 bloc")){
+                main.worldBorder ++;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
+            }
+            if(nameIs(current, "§aAjouter 10 blocs")){
+                main.worldBorder = main.worldBorder + 10;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
+            }
+            if(nameIs(current, "§aAjouter 100 blocs")){
+                main.worldBorder = main.worldBorder + 100;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
+            }
+            if(nameIs(current, "§cRetirer 1 bloc")){
+                if(main.worldBorder == 1){
+                    p.sendMessage("§cVous ne pouvez pas descendre en dessous de 1 bloc !");
+                    return;
+                }
+                main.worldBorder --;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
+            }
+            if(nameIs(current, "§cRetirer 10 blocs")){
+                if(main.worldBorder < 11){
+                    p.sendMessage("§cVous ne pouvez pas descendre en dessous de 1 bloc !");
+                    return;
+                }
+                main.worldBorder = main.worldBorder - 10;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
+            }
+            if(nameIs(current, "§cRetirer 100 blocs")){
+                if(main.worldBorder < 101){
+                    p.sendMessage("§cVous ne pouvez pas descendre en dessous de 1 bloc !");
+                    return;
+                }
+                main.worldBorder = main.worldBorder - 100;
+
+                ItemStack brick = new ItemStack(Material.LEVER);
+                ItemMeta brickItemMeta = brick.getItemMeta();;
+                brickItemMeta.setDisplayName("§bTaille de la bordure : §a" + main.worldBorder + " blocs");
+                brick.setItemMeta(brickItemMeta);
+
+                inv.setItem(13,brick);
+                p.updateInventory();
+                main.setWorldBorder(main.worldBorder);
             }
         }
 
