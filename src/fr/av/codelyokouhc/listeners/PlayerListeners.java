@@ -9,6 +9,7 @@ import fr.av.codelyokouhc.loops.DoubleJumpCooldownLoop;
 import fr.av.codelyokouhc.loops.FlyLoops;
 import fr.av.codelyokouhc.loops.OpenInventoryCooldownLoop;
 import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
@@ -94,13 +95,14 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onGenerateBiome(ChunkPopulateEvent e){
-        if(e.getChunk().getX() > 125 || e.getChunk().getX() < -125){
+        if(e.getChunk().getBlock(0,0,0).getLocation().getX() > 100 || e.getChunk().getBlock(0,0,0).getLocation().getX() < -100){
             return;
         }
-        if(e.getChunk().getZ() > 125 || e.getChunk().getZ() < -125){
+        if(e.getChunk().getBlock(0,0,0).getLocation().getZ() > 100 || e.getChunk().getBlock(0,0,0).getLocation().getZ() < -100){
             return;
         }
         Chunk chunk = e.getChunk();
+        Bukkit.broadcastMessage("Génération de la foret pour le chunk : " + e.getChunk().getBlock(0,0,0).getLocation().getX() + "," + e.getChunk().getBlock(0,0,0).getLocation().getZ());
         populate(chunk.getWorld(), new Random(), chunk);
     }
 
@@ -737,8 +739,10 @@ public class PlayerListeners implements Listener {
     }
 
     public void populate(World world, Random random, Chunk source) {
-        int numTrees = 50;
-
+        int numTrees = 150;
+        world.setBiome(source.getX(),source.getZ(), Biome.FOREST_HILLS);
+        source.unload();
+        source.load();
         for (int i = 0; i < numTrees; ++i) {
             int x = random.nextInt(16) + source.getX() * 16;
             int z = random.nextInt(16) + source.getZ() * 16;
