@@ -50,17 +50,19 @@ public class StartGameCommand implements CommandExecutor {
         Bukkit.broadcastMessage("Taches lancées !");
         Bukkit.broadcastMessage("Préparation des joueurs...");
         for (Player player:Bukkit.getWorld("world").getPlayers()) {
-            main.ClearPlayer(player);
+            if(player.getGameMode() != GameMode.SPECTATOR){
+                main.ClearPlayer(player);
 
-            player.setGameMode(GameMode.SURVIVAL);
-            player.getWorld().setTime(0);
+                player.setGameMode(GameMode.SURVIVAL);
+                player.getWorld().setTime(0);
 
-            Bukkit.broadcastMessage("§eTéléportation de " + player.getDisplayName());
-            Location playerSpawn = new Location(main.getServer().getWorld("world"), new Random().nextInt(main.worldBorder - (-main.worldBorder)) + (-main.worldBorder), 0, new Random().nextInt(main.worldBorder - (-main.worldBorder)) + (-main.worldBorder));
-            int y = playerSpawn.getWorld().getHighestBlockYAt(playerSpawn);
-            playerSpawn = new Location(playerSpawn.getWorld(), playerSpawn.getX(), y, playerSpawn.getZ());
+                Bukkit.broadcastMessage("§eTéléportation de " + player.getDisplayName());
+                Location playerSpawn = new Location(main.getServer().getWorld("world"), new Random().nextInt(main.worldBorder - (-main.worldBorder)) + (-main.worldBorder), 0, new Random().nextInt(main.worldBorder - (-main.worldBorder)) + (-main.worldBorder));
+                int y = playerSpawn.getWorld().getHighestBlockYAt(playerSpawn);
+                playerSpawn = new Location(playerSpawn.getWorld(), playerSpawn.getX(), y, playerSpawn.getZ());
 
-            player.teleport(playerSpawn);
+                player.teleport(playerSpawn);
+            }
         }
         Bukkit.broadcastMessage("Joueurs prêts !");
         Bukkit.broadcastMessage("§aC'est parti !");
