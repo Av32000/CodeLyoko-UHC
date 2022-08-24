@@ -4,7 +4,6 @@ import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GRoles;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;

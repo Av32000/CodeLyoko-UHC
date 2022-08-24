@@ -2,7 +2,6 @@ package fr.av.codelyokouhc.loops;
 
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GRoles;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;

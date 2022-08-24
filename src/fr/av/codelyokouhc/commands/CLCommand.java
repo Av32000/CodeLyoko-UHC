@@ -1,7 +1,6 @@
 package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.Main;
-import fr.av.codelyokouhc.loops.InfectLoop;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

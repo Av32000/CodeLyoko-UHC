@@ -2,7 +2,6 @@ package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.Main;
 import fr.av.codelyokouhc.enums.GState;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

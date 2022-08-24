@@ -1,7 +1,6 @@
 package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.Main;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;

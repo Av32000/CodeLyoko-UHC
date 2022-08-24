@@ -1,7 +1,6 @@
 package fr.av.codelyokouhc.loops;
 
 import fr.av.codelyokouhc.Main;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class AskCooldownLoop extends BukkitRunnable {

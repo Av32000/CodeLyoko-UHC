@@ -1,7 +1,6 @@
 package fr.av.codelyokouhc.commands;
 
 import fr.av.codelyokouhc.Main;
-import fr.av.codelyokouhc.ScoreboardManagerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
