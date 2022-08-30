@@ -16,7 +16,11 @@ public class LyokoTp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
-            ((Player) commandSender).teleport(new Location(main.getServer().getWorld("lyoko"),0,main.getServer().getWorld("lyoko").getHighestBlockYAt(0,0),0 ));
+            if(main.lyokoWorld != null){
+                ((Player) commandSender).teleport(new Location(main.lyokoWorld,0,main.lyokoWorld.getHighestBlockYAt(0,0),0 ));
+            }else{
+                commandSender.sendMessage("§cLe monde du lyoko n'est pas définis (/setLyokoWorld)");
+            }
         }
         return true;
     }

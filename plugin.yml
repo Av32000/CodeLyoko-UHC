@@ -40,6 +40,10 @@ commands:
     description: Ouvre le menu de configuration du jeu
     permission: codelyoko.admin
 
+  setLyokoWorld:
+    description: Set le monde a utilisé pour le lyoko
+    permission: codelyoko.admin
+
   generateFactory:
     description: Génère l'usine
     permission: codelyoko.admin

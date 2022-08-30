@@ -42,6 +42,11 @@ public class StartGameCommand implements CommandExecutor {
             main.setState(GState.WAITINGPLAYERS);
             return;
         }
+        if(main.lyokoWorld == null){
+            Bukkit.broadcastMessage("§4Impossible de lancer le jeu: Le monde du lyoko n'est pas définis (/setLyokoWorld)");
+            main.setState(GState.WAITINGPLAYERS);
+            return;
+        }
         Bukkit.broadcastMessage("Variables valides !");
         Bukkit.broadcastMessage("Lancement des taches...");
         GameLoop start = new GameLoop(main);
