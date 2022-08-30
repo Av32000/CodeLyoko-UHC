@@ -210,7 +210,12 @@ public class PlayerListeners implements Listener {
                 main.lyokoBoostedPlayer.put(p,1);
             }
             p.sendMessage("§cLa puissance du Lyoko entre en vous et boost vos dégats de " + main.lyokoBoostedPlayer.get(p) * 20 + "% !");
-            p.getInventory().remove(e.getItem());
+            if(e.getItem().getAmount() > 1){
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+                p.updateInventory();
+            }else{
+                p.getInventory().remove(e.getItem());
+            }
         }
     }
 
